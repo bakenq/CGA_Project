@@ -38,6 +38,7 @@ function main() {
 
   document.getElementById('3d_content').appendChild(window.renderer.domElement);
 
+  /*
   const television = new Television();
   television.position.set(-30, 55.8, 0);
   television.rotation.set(0, THREE.MathUtils.degToRad(10), 0);
@@ -60,6 +61,33 @@ function main() {
   plantFromFile.addPhysics();
   plantFromFile.addSound();
   window.scene.add(plantFromFile);
+
+   */
+
+  // Create the wind wheel blade geometry
+  const bladeGeometry = new THREE.CylinderGeometry(2, 2, 32, 64);
+
+  // Create the wind wheel blade material
+  const bladeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+
+  // Create the wind wheel blade mesh
+  const windWheel = new THREE.Mesh(bladeGeometry, bladeMaterial);
+  windWheel.position.set(0, 32, 0);
+  window.scene.add(windWheel);
+
+  // Create the wind wheel blade geometry
+  const baseGeometry = new THREE.CylinderGeometry(2, 2, 32, 64);
+
+  // Create the wind wheel blade material
+  const baseMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+
+  // Create the wind wheel blade mesh
+  const base = new THREE.Mesh(baseGeometry, baseMaterial);
+  base.position.set(4, 16, 0);
+  window.scene.add(base);
+
+
+
 
   const floor = new Floor();
   floor.position.set(0, 0, 0);
@@ -104,6 +132,7 @@ function main() {
 
     const delta = clock.getDelta();
 
+    /*
     television.animations.forEach(function (animation) {
       animation.update(delta);
     });
@@ -114,9 +143,14 @@ function main() {
       televisionFromFile.animationMixer.update(delta);
     }
 
+     */
+
     window.physics.update(delta);
 
     window.renderer.render(window.scene, window.camera);
+    // Update the wind wheel's rotation
+    windWheel.rotation.x += 0.01;
+    windWheel.rotation.y += 0.01;
 
     stats.end();
     requestAnimationFrame(mainLoop);
