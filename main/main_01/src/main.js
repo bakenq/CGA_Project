@@ -5,6 +5,7 @@ import * as TWEEN from 'tween';
 import Stats from 'stats';
 
 // Own modules
+import PowerStation from './objects/PowerStation.js';
 import Television from './objects/Television.js';
 import TelevisionFromFile from './objects/TelevisionFromFile.js';
 import TableFromFile from './objects/TableFromFile.js';
@@ -38,84 +39,31 @@ function main() {
 
   document.getElementById('3d_content').appendChild(window.renderer.domElement);
 
-  /*
-  const television = new Television();
-  television.position.set(-30, 55.8, 0);
-  television.rotation.set(0, THREE.MathUtils.degToRad(10), 0);
-  television.addPhysics();
-  window.scene.add(television);
-
-  const televisionFromFile = new TelevisionFromFile();
-  televisionFromFile.position.set(30, 55.8, 0);
-  televisionFromFile.rotation.set(0, THREE.MathUtils.degToRad(-10), 0);
-  televisionFromFile.addPhysics();
-  window.scene.add(televisionFromFile);
-
-  const tableFromFile = new TableFromFile();
-  tableFromFile.position.set(0, 0, 0);
-  tableFromFile.addPhysics();
-  window.scene.add(tableFromFile);
-
-  const plantFromFile = new PlantFromFile();
-  plantFromFile.position.set(-75, 75, -75);
-  plantFromFile.addPhysics();
-  plantFromFile.addSound();
-  window.scene.add(plantFromFile);
-
-   */
 
 
-
-  // Base
-  const baseGeometry = new THREE.CylinderGeometry(6, 6, 16, 32);
-
-  const baseMaterial = new THREE.MeshBasicMaterial({ color: 0x808080 });
-
-  const base = new THREE.Mesh(baseGeometry, baseMaterial);
-  base.position.set(0, 8, 0);
-  base.castShadow = true;
-
-  // Tower
-  const towerGeometry = new THREE.CylinderGeometry(4, 4, 48, 32);
-
-  const towerMaterial = new THREE.MeshBasicMaterial({ color: 0xe5de00 });
-
-  const tower = new THREE.Mesh(towerGeometry, towerMaterial);
-  tower.position.set(0, 40, 0);
-  tower.castShadow = true;
-
-  // Blade Arm
-  const armGeometry = new THREE.BoxGeometry(4, 4, 48);
-
-  const armMaterial = new THREE.MeshBasicMaterial({ color: 0xe5de00 });
-
-  const arm = new THREE.Mesh(armGeometry, armMaterial);
-  arm.position.set(0 , 24, 0);
-  arm.castShadow = true;
+  const powerStation = new PowerStation();
+  powerStation.position.set(0, 0, 0);
+  window.scene.add(powerStation);
 
   // Blades
+  // weil ich noch nicht weiß wie ich die Animation in der externen Datei mache
+  const bladeMaterial = new THREE.MeshPhongMaterial({
+    color: 0xd3d3d3,
+    flatShading: true,
+    specular: 0x111111,
+    shininess: 100
+  });
+
   const bladeGeometry = new THREE.CylinderGeometry(2, 2, 32, 32);
+  const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
+  blade.position.set(-4, 24, -22);
+  blade.castShadow = true;
+  window.scene.add(blade)
 
-  const bladeMaterial = new THREE.MeshBasicMaterial({ color: 0xd3d3d3 });
-
-  const windWheel = new THREE.Mesh(bladeGeometry, bladeMaterial);
-  windWheel.position.set(-4, 24, -22);
-  windWheel.castShadow = true;
-
-  const windWheel2 = new THREE.Mesh(bladeGeometry, bladeMaterial);
-  windWheel2.position.set(-4, 24, 22);
-  windWheel2.castShadow = true;
-
-  // Group
-  let wwGroup = new THREE.Group();
-  wwGroup.add(base);
-  wwGroup.add(tower);
-  wwGroup.add(arm);
-  wwGroup.add(windWheel);
-  wwGroup.add(windWheel2);
-  window.scene.add(wwGroup);
-
-
+  const blade2 = new THREE.Mesh(bladeGeometry, bladeMaterial);
+  blade2.position.set(-4, 24, 22);
+  blade2.castShadow = true;
+  window.scene.add(blade2)
 
 
   const floor = new Floor();
@@ -161,28 +109,16 @@ function main() {
 
     const delta = clock.getDelta();
 
-    /*
-    television.animations.forEach(function (animation) {
-      animation.update(delta);
-    });
-
-    TWEEN.update();
-
-    if (televisionFromFile.animationMixer !== null) {
-      televisionFromFile.animationMixer.update(delta);
-    }
-
-     */
-
     window.physics.update(delta);
 
     window.renderer.render(window.scene, window.camera);
     // Update the wind wheel's rotation
-    windWheel.rotation.x += 0.01;
-    windWheel.rotation.y += 0.01;
+    blade.rotation.x += 0.01;
+    blade.rotation.y += 0.01;
 
-    windWheel2.rotation.x += 0.01;
-    windWheel2.rotation.y += 0.01;
+    blade2.rotation.x += 0.01;
+    blade2.rotation.y += 0.01;
+
 
 
     stats.end();
