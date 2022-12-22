@@ -64,32 +64,55 @@ function main() {
 
    */
 
-  // Create the wind wheel blade geometry
-  const bladeGeometry = new THREE.CylinderGeometry(2, 2, 48, 32);
 
-  // Create the wind wheel blade material
-  const bladeMaterial = new THREE.MeshBasicMaterial({ color: 0xffae42 });
 
-  // Create the wind wheel blade mesh
-  const windWheel = new THREE.Mesh(bladeGeometry, bladeMaterial);
-  windWheel.position.set(-4, 48, 0);
-  windWheel.castShadow = true;
+  // Base
+  const baseGeometry = new THREE.CylinderGeometry(6, 6, 16, 32);
 
-  // Create the wind wheel blade geometry
-  const baseGeometry = new THREE.CylinderGeometry(4, 6, 48, 32);
+  const baseMaterial = new THREE.MeshBasicMaterial({ color: 0x808080 });
 
-  // Create the wind wheel blade material
-  const baseMaterial = new THREE.MeshBasicMaterial({ color: 0xffae42 });
-
-  // Create the wind wheel blade mesh
   const base = new THREE.Mesh(baseGeometry, baseMaterial);
-  base.position.set(0, 24, 0);
+  base.position.set(0, 8, 0);
   base.castShadow = true;
 
-  // Wind Wheel Group
+  // Tower
+  const towerGeometry = new THREE.CylinderGeometry(4, 4, 48, 32);
+
+  const towerMaterial = new THREE.MeshBasicMaterial({ color: 0xe5de00 });
+
+  const tower = new THREE.Mesh(towerGeometry, towerMaterial);
+  tower.position.set(0, 40, 0);
+  tower.castShadow = true;
+
+  // Blade Arm
+  const armGeometry = new THREE.BoxGeometry(4, 4, 48);
+
+  const armMaterial = new THREE.MeshBasicMaterial({ color: 0xe5de00 });
+
+  const arm = new THREE.Mesh(armGeometry, armMaterial);
+  arm.position.set(0 , 24, 0);
+  arm.castShadow = true;
+
+  // Blades
+  const bladeGeometry = new THREE.CylinderGeometry(2, 2, 32, 32);
+
+  const bladeMaterial = new THREE.MeshBasicMaterial({ color: 0xd3d3d3 });
+
+  const windWheel = new THREE.Mesh(bladeGeometry, bladeMaterial);
+  windWheel.position.set(-4, 24, -22);
+  windWheel.castShadow = true;
+
+  const windWheel2 = new THREE.Mesh(bladeGeometry, bladeMaterial);
+  windWheel2.position.set(-4, 24, 22);
+  windWheel2.castShadow = true;
+
+  // Group
   let wwGroup = new THREE.Group();
-  wwGroup.add(windWheel);
   wwGroup.add(base);
+  wwGroup.add(tower);
+  wwGroup.add(arm);
+  wwGroup.add(windWheel);
+  wwGroup.add(windWheel2);
   window.scene.add(wwGroup);
 
 
@@ -157,6 +180,10 @@ function main() {
     // Update the wind wheel's rotation
     windWheel.rotation.x += 0.01;
     windWheel.rotation.y += 0.01;
+
+    windWheel2.rotation.x += 0.01;
+    windWheel2.rotation.y += 0.01;
+
 
     stats.end();
     requestAnimationFrame(mainLoop);
