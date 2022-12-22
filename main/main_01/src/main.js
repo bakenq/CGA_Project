@@ -56,12 +56,12 @@ function main() {
 
   const bladeGeometry = new THREE.CylinderGeometry(2, 2, 32, 32);
   const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
-  blade.position.set(-4, 24, -22);
+  blade.position.set(-8, 24, -22);
   blade.castShadow = true;
   window.scene.add(blade)
 
   const blade2 = new THREE.Mesh(bladeGeometry, bladeMaterial);
-  blade2.position.set(-4, 24, 22);
+  blade2.position.set(-8, 24, 22);
   blade2.castShadow = true;
   window.scene.add(blade2)
 

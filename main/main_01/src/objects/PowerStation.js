@@ -24,21 +24,21 @@ export default class PowerStation extends THREE.Group {
         // Materials
         const baseMaterial = new THREE.MeshPhongMaterial({
             color: 0x808080,
-            flatShading: true,
+            flatShading: false,
             specular: 0x111111,
             shininess: 100
         });
 
         const towerMaterial = new THREE.MeshPhongMaterial({
             color: 0xe5de00,
-            flatShading: true,
+            flatShading: false,
             specular: 0x111111,
             shininess: 100
         });
 
         const bladeMaterial = new THREE.MeshPhongMaterial({
             color: 0xd3d3d3,
-            flatShading: true,
+            flatShading: false,
             specular: 0x111111,
             shininess: 100
         });
@@ -65,7 +65,33 @@ export default class PowerStation extends THREE.Group {
         const arm = new THREE.Mesh(armGeometry, towerMaterial);
         arm.position.set(0 , 24, 0);
         arm.castShadow = true;
-        this.add(arm);
+        //this.add(arm);
+
+        const length = 64, width = 8;
+
+        const shape = new THREE.Shape();
+        shape.moveTo( 0,0 );
+        shape.lineTo( 0, width );
+        shape.lineTo( length, width );
+        shape.lineTo( length, 0 );
+        shape.lineTo( 0, 0 );
+
+        const extrudeSettings = {
+            steps: 2,
+            depth: 6,
+            bevelEnabled: true,
+            bevelThickness: 3,
+            bevelSize: 1,
+            bevelOffset: -3,
+            bevelSegments: 4
+        };
+
+        const bladeArmgeometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+        const bladeArm = new THREE.Mesh( bladeArmgeometry, towerMaterial ) ;
+        bladeArm.position.set(-3, 20, 32);
+        bladeArm.rotation.y = Math.PI / 2;
+        this.add( bladeArm );
+
 
         // Blades
         /*
