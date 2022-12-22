@@ -65,26 +65,32 @@ function main() {
    */
 
   // Create the wind wheel blade geometry
-  const bladeGeometry = new THREE.CylinderGeometry(2, 2, 32, 64);
+  const bladeGeometry = new THREE.CylinderGeometry(2, 2, 48, 32);
 
   // Create the wind wheel blade material
-  const bladeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+  const bladeMaterial = new THREE.MeshBasicMaterial({ color: 0xffae42 });
 
   // Create the wind wheel blade mesh
   const windWheel = new THREE.Mesh(bladeGeometry, bladeMaterial);
-  windWheel.position.set(0, 32, 0);
-  window.scene.add(windWheel);
+  windWheel.position.set(-4, 48, 0);
+  windWheel.castShadow = true;
 
   // Create the wind wheel blade geometry
-  const baseGeometry = new THREE.CylinderGeometry(2, 2, 32, 64);
+  const baseGeometry = new THREE.CylinderGeometry(4, 6, 48, 32);
 
   // Create the wind wheel blade material
-  const baseMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+  const baseMaterial = new THREE.MeshBasicMaterial({ color: 0xffae42 });
 
   // Create the wind wheel blade mesh
   const base = new THREE.Mesh(baseGeometry, baseMaterial);
-  base.position.set(4, 16, 0);
-  window.scene.add(base);
+  base.position.set(0, 24, 0);
+  base.castShadow = true;
+
+  // Wind Wheel Group
+  let wwGroup = new THREE.Group();
+  wwGroup.add(windWheel);
+  wwGroup.add(base);
+  window.scene.add(wwGroup);
 
 
 
@@ -159,11 +165,5 @@ function main() {
   mainLoop();
 }
 
-document.getElementById("startButton").addEventListener("click", function () {
-  main();
-  document.getElementById("overlay").remove();
-  window.onresize = updateAspectRatio;
-  window.onclick = executeRaycast;
-  window.onkeydown = keyDownAction;
-  window.onkeyup = keyUpAction;
-});
+window.onload = main;
+window.onresize = updateAspectRatio;
