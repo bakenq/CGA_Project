@@ -40,7 +40,7 @@ function main() {
   document.getElementById('3d_content').appendChild(window.renderer.domElement);
 
 
-
+  // Power Station
   const powerStation = new PowerStation();
   powerStation.position.set(0, 0, 0);
   window.scene.add(powerStation);
@@ -66,10 +66,12 @@ function main() {
   window.scene.add(blade2)
 
 
+  // Floor
   const floor = new Floor();
   floor.position.set(0, 0, 0);
   window.scene.add(floor);
 
+  // Lights
   const ambientLight = new THREE.AmbientLight(0xffffff);
   ambientLight.intensity = 0.5;
   window.scene.add(ambientLight);
