@@ -60,6 +60,46 @@ export default class PowerStation extends THREE.Group {
         tower.castShadow = true;
         this.add(tower);
 
+        // TowerTop
+        const towerTopGeometry = new THREE.CylinderGeometry(8,8,10,9);
+        const towerTop = new THREE.Mesh(towerTopGeometry, towerMaterial);
+        towerTop.position.set(0,66,0);
+        towerTop.castShadow = true;
+        this.add(towerTop);
+
+        // Tower balcony
+        // ------------- Ist nach dem drehen nicht mehr sichtbar und ich weis nicht ganz warum muss noch gefixt werden ---------
+        //Außerdem sollte noch etwas dicke hinzugefügt weden sonst ist es so dünn.
+        const towerBalconyGeometry = new THREE.CircleGeometry(16,45);
+        const towerBalcony = new THREE.Mesh(towerBalconyGeometry, towerMaterial);
+        towerBalcony.position.set(0,60,0);
+        towerBalcony.rotation.x = Math.PI / 2;
+        towerBalcony.castShadow = true;
+        this.add(towerBalcony);
+
+        //Tower Balcony Railing (2 Parts)
+
+        //Railing 1 top
+        const towerBalconyRailingGeometry = new THREE.TorusBufferGeometry(15,0.25,10,45);
+        const towerBalconyRailing = new THREE.Mesh(towerBalconyRailingGeometry, towerMaterial);
+        towerBalconyRailing.position.set(0,65,0);
+        towerBalconyRailing.rotation.x = Math.PI / 2;
+        towerBalconyRailing.castShadow = true;
+        this.add(towerBalconyRailing);
+
+        //Railing 2 bot
+        const towerBalconyRailingBot = towerBalconyRailing.clone();
+        towerBalconyRailingBot.position.set(0, 62,0);
+        this.add(towerBalconyRailingBot);
+
+
+        //Tower Top Roof
+        const towerTopRoofGeometry = new THREE.CylinderGeometry(1,8,8,9);
+        const towerTopRoof = new THREE.Mesh(towerTopRoofGeometry, towerMaterial);
+        towerTopRoof.position.set(0,75,0);
+        towerTopRoof.castShadow = true;
+        this.add(towerTopRoof);
+
         // Blade Arm
         const armGeometry = new THREE.BoxGeometry(4, 4, 48);
         const arm = new THREE.Mesh(armGeometry, towerMaterial);
