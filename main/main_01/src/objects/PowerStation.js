@@ -47,18 +47,29 @@ export default class PowerStation extends THREE.Group {
         // Geometry
 
         // Base
-        const baseGeometry = new THREE.CylinderGeometry(6, 6, 16, 32);
+        const baseGeometry = new THREE.CylinderGeometry(8, 8, 16, 32);
         const base = new THREE.Mesh(baseGeometry, baseMaterial);
         base.position.set(0, 8, 0);
         base.castShadow = true;
         this.add(base);
 
+
         // Tower
-        const towerGeometry = new THREE.CylinderGeometry(4, 4, 48, 32);
+        const towerGeometry = new THREE.CylinderGeometry(6, 6, 48, 32);
         const tower = new THREE.Mesh(towerGeometry, towerMaterial);
         tower.position.set(0, 40, 0);
         tower.castShadow = true;
+
+        const towerSidesGeometry = new THREE.BoxGeometry(1, 44, 13.85);
+        const towerSides = new THREE.Mesh(towerSidesGeometry, towerMaterial);
+        towerSides.position.set(0, -2, 0);
+        towerSides.castShadow = true;
+
+        tower.add(towerSides);
         this.add(tower);
+
+
+
 
         // TowerTop
         const towerTopGeometry = new THREE.CylinderGeometry(8,8,10,8);
@@ -67,6 +78,7 @@ export default class PowerStation extends THREE.Group {
         towerTop.castShadow = true;
         this.add(towerTop);
 
+
         // Tower balcony
         const towerBalconyGeometry = new THREE.CylinderGeometry(14, 14, 1, 32);
         const towerBalcony = new THREE.Mesh(towerBalconyGeometry, towerMaterial);
@@ -74,6 +86,7 @@ export default class PowerStation extends THREE.Group {
         towerBalcony.rotation.y = Math.PI / 2;
         towerBalcony.castShadow = true;
         this.add(towerBalcony);
+
 
         //Tower Balcony Railing (2 Parts)
 
@@ -98,12 +111,12 @@ export default class PowerStation extends THREE.Group {
         towerTopRoof.castShadow = true;
         this.add(towerTopRoof);
 
+
         // Blade Arm
         const armGeometry = new THREE.BoxGeometry(4, 4, 48);
         const arm = new THREE.Mesh(armGeometry, towerMaterial);
         arm.position.set(0 , 24, 0);
         arm.castShadow = true;
-        //this.add(arm);
 
         const length = 64, width = 8;
 
@@ -115,13 +128,13 @@ export default class PowerStation extends THREE.Group {
         shape.lineTo( 0, 0 );
 
         const extrudeSettings = {
-            steps: 2,
+            steps: 4,
             depth: 6,
             bevelEnabled: true,
-            bevelThickness: 3,
+            bevelThickness: 3.5,
             bevelSize: 1,
-            bevelOffset: -3,
-            bevelSegments: 4
+            bevelOffset: -3.75,
+            bevelSegments: 6
         };
 
         const bladeArmgeometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
@@ -129,7 +142,14 @@ export default class PowerStation extends THREE.Group {
         bladeArm.position.set(-3, 20, 32);
         bladeArm.rotation.y = Math.PI / 2;
         bladeArm.castShadow = true;
-        this.add( bladeArm );
+
+        const armHolderGeometry = new THREE.CylinderGeometry(7, 7, 12, 32);
+        const armHolder = new THREE.Mesh(armHolderGeometry, towerMaterial);
+        armHolder.position.set(32, 4, 3);
+        armHolder.castShadow = true;
+
+        bladeArm.add(armHolder);
+        this.add(bladeArm);
 
 
         // Blades
