@@ -5,10 +5,10 @@ export default class Floor extends THREE.Group {
   constructor() {
     super();
 
-    const floorGeometry = new THREE.PlaneGeometry(200, 200);
+    const floorGeometry = new THREE.PlaneGeometry(400, 400);
     const floorMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, roughness: 0.3});
 
-    const floorTexture = new THREE.TextureLoader().load('src/images/Oceanboden.jpg');
+    const floorTexture = new THREE.TextureLoader().load('src/images/SeamlessWater.png');
     floorTexture.repeat.set(4, 4);
     floorTexture.wrapS = THREE.RepeatWrapping;
     floorTexture.wrapT = THREE.RepeatWrapping;
