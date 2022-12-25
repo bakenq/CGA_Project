@@ -61,26 +61,24 @@ export default class PowerStation extends THREE.Group {
         this.add(tower);
 
         // TowerTop
-        const towerTopGeometry = new THREE.CylinderGeometry(8,8,10,9);
+        const towerTopGeometry = new THREE.CylinderGeometry(8,8,10,8);
         const towerTop = new THREE.Mesh(towerTopGeometry, towerMaterial);
-        towerTop.position.set(0,66,0);
+        towerTop.position.set(0,65,0);
         towerTop.castShadow = true;
         this.add(towerTop);
 
         // Tower balcony
-        // ------------- Ist nach dem drehen nicht mehr sichtbar und ich weis nicht ganz warum muss noch gefixt werden ---------
-        //Außerdem sollte noch etwas dicke hinzugefügt weden sonst ist es so dünn.
-        const towerBalconyGeometry = new THREE.CircleGeometry(16,45);
+        const towerBalconyGeometry = new THREE.CylinderGeometry(14, 14, 1, 32);
         const towerBalcony = new THREE.Mesh(towerBalconyGeometry, towerMaterial);
         towerBalcony.position.set(0,60,0);
-        towerBalcony.rotation.x = Math.PI / 2;
+        towerBalcony.rotation.y = Math.PI / 2;
         towerBalcony.castShadow = true;
         this.add(towerBalcony);
 
         //Tower Balcony Railing (2 Parts)
 
         //Railing 1 top
-        const towerBalconyRailingGeometry = new THREE.TorusBufferGeometry(15,0.25,10,45);
+        const towerBalconyRailingGeometry = new THREE.TorusBufferGeometry(14,0.25,10,45);
         const towerBalconyRailing = new THREE.Mesh(towerBalconyRailingGeometry, towerMaterial);
         towerBalconyRailing.position.set(0,65,0);
         towerBalconyRailing.rotation.x = Math.PI / 2;
@@ -94,9 +92,9 @@ export default class PowerStation extends THREE.Group {
 
 
         //Tower Top Roof
-        const towerTopRoofGeometry = new THREE.CylinderGeometry(1,8,8,9);
+        const towerTopRoofGeometry = new THREE.CylinderGeometry(1,8,8,8);
         const towerTopRoof = new THREE.Mesh(towerTopRoofGeometry, towerMaterial);
-        towerTopRoof.position.set(0,75,0);
+        towerTopRoof.position.set(0,74,0);
         towerTopRoof.castShadow = true;
         this.add(towerTopRoof);
 
