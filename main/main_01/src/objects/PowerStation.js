@@ -130,6 +130,7 @@ export default class PowerStation extends THREE.Group {
         const bladeArm = new THREE.Mesh( bladeArmgeometry, towerMaterial ) ;
         bladeArm.position.set(-3, 20, 32);
         bladeArm.rotation.y = Math.PI / 2;
+        bladeArm.castShadow = true;
         this.add( bladeArm );
 
 
