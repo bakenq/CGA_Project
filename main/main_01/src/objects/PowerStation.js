@@ -111,6 +111,13 @@ export default class PowerStation extends THREE.Group {
         towerTopRoof.castShadow = true;
         this.add(towerTopRoof);
 
+        //Tower Antenna
+        const towerAntennaGeometry = new THREE.CylinderGeometry(0.25,0.25,25);
+        const towerAntenna = new THREE.Mesh(towerAntennaGeometry, towerMaterial);
+        towerAntenna.position.set(0,80,-0.5);
+        towerAntenna.castShadow = true;
+        this.add(towerAntenna);
+
 
         // Blade Arm
         const armGeometry = new THREE.BoxGeometry(4, 4, 48);
