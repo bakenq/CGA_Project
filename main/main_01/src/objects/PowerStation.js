@@ -118,6 +118,14 @@ export default class PowerStation extends THREE.Group {
         towerAntenna.castShadow = true;
         this.add(towerAntenna);
 
+        //Turbine
+        const turbineGeometry = new THREE.CapsuleGeometry(2,20);
+        const turbine = new THREE.Mesh(turbineGeometry, towerMaterial);
+        turbine.position.set(0,25,22)
+        turbine.castShadow = true;
+        turbine.rotation.z = Math.PI / 2;
+        //this.add(turbine);
+
 
         // Blade Arm
         const armGeometry = new THREE.BoxGeometry(4, 4, 48);
@@ -174,6 +182,51 @@ export default class PowerStation extends THREE.Group {
 
          */
 
+
+
+        //Blades mit BufferGeoemtry
+        const positions = [
+            1, 0, 0, //0
+            0, 0, 2, //1
+            1, 15, 0, //2
+            0, 15, 2, //3
+
+            1, 0, 0, //4
+            2, 0, 2, //5
+            1, 15, 0, //6
+            2, 15, 2, //7
+        ];
+
+        const indices = [
+            2,0,1, //Seite 1 1/2
+            1,3,2, //Seite 1 2/2
+
+            6,2,3, //Top 1/2
+            3,7,6, //Top 2/2
+
+            6,4,5, //Seite 2 1/2
+            5,7,6, //Seite 2 2/2
+
+            4,0,1, //bot 1/2
+            1,5,4, //bot 2/2
+
+            3,1,5, //Front 1/2
+            5,7,3,  //Front 2/2
+
+            6,4,0, //Back 1/2
+            0,2,6  //Back 2/2
+
+
+        ];
+
+        const bladeGeometry = new THREE.BufferGeometry();
+        bladeGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
+        bladeGeometry.setIndex(indices);
+        bladeGeometry.computeVertexNormals();
+        const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
+        blade.castShadow = true;
+        blade.position.set(0,20,40);
+        this.add(blade);
 
 
     }
