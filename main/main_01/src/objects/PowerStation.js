@@ -41,7 +41,8 @@ export default class PowerStation extends THREE.Group {
             color: 0xd3d3d3,
             flatShading: false,
             specular: 0x111111,
-            shininess: 100
+            shininess: 100,
+            side: THREE.DoubleSide
         });
 
 
@@ -53,6 +54,7 @@ export default class PowerStation extends THREE.Group {
         const base = new THREE.Mesh(baseGeometry, baseMaterial);
         base.position.set(0, 8, 0);
         base.castShadow = true;
+        base.receiveShadow = true;
         this.add(base);
 
 
@@ -61,11 +63,13 @@ export default class PowerStation extends THREE.Group {
         const tower = new THREE.Mesh(towerGeometry, towerMaterial);
         tower.position.set(0, 40, 0);
         tower.castShadow = true;
+        tower.receiveShadow = true;
 
         const towerSidesGeometry = new THREE.BoxGeometry(1, 44, 13.85);
         const towerSides = new THREE.Mesh(towerSidesGeometry, towerMaterial);
         towerSides.position.set(0, -2, 0);
         towerSides.castShadow = true;
+        towerSides.receiveShadow = true;
 
         tower.add(towerSides);
         this.add(tower);
@@ -78,6 +82,7 @@ export default class PowerStation extends THREE.Group {
         const towerTop = new THREE.Mesh(towerTopGeometry, towerMaterial);
         towerTop.position.set(0,65,0);
         towerTop.castShadow = true;
+        towerTop.receiveShadow = true;
         this.add(towerTop);
 
 
@@ -87,17 +92,42 @@ export default class PowerStation extends THREE.Group {
         towerBalcony.position.set(0,60,0);
         towerBalcony.rotation.y = Math.PI / 2;
         towerBalcony.castShadow = true;
+        towerBalcony.receiveShadow = true;
         this.add(towerBalcony);
+
+        // Tower balcony fence
+        //Original
+        const fenceGeometry = new THREE.CylinderGeometry(0.15,0.15,5.5);
+        const fence = new THREE.Mesh(fenceGeometry, towerMaterial);
+        fence.position.set(0,62.25,13.5);
+        fence.castShadow = true;
+        //this.add(fence, fence2);
+
+        //Copys
+        const fence2 = fence.clone();
+        fence2.position.set(0,62.25, -13.5);
+
+        const fence3 = fence.clone();
+        fence3.position.set(13.5,62.25,0);
+
+        const fence4 = fence.clone();
+        fence4.position.set(-13.5,62.25,0);
+
+
+
+        //Adding fences
+        this.add(fence, fence2, fence3, fence4);
 
 
         //Tower Balcony Railing (2 Parts)
 
         //Railing 1 top
-        const towerBalconyRailingGeometry = new THREE.TorusBufferGeometry(14,0.25,10,45);
+        const towerBalconyRailingGeometry = new THREE.TorusBufferGeometry(13.5,0.25,10,45);
         const towerBalconyRailing = new THREE.Mesh(towerBalconyRailingGeometry, towerMaterial);
         towerBalconyRailing.position.set(0,65,0);
         towerBalconyRailing.rotation.x = Math.PI / 2;
         towerBalconyRailing.castShadow = true;
+        towerBalconyRailing.receiveShadow = true;
         this.add(towerBalconyRailing);
 
         //Railing 2 bot
@@ -111,6 +141,7 @@ export default class PowerStation extends THREE.Group {
         const towerTopRoof = new THREE.Mesh(towerTopRoofGeometry, towerMaterial);
         towerTopRoof.position.set(0,74,0);
         towerTopRoof.castShadow = true;
+        towerTopRoof.receiveShadow = true;
         this.add(towerTopRoof);
 
         //Tower Antenna
@@ -118,15 +149,23 @@ export default class PowerStation extends THREE.Group {
         const towerAntenna = new THREE.Mesh(towerAntennaGeometry, towerMaterial);
         towerAntenna.position.set(0,80,-0.5);
         towerAntenna.castShadow = true;
+        towerAntenna.receiveShadow = true;
         this.add(towerAntenna);
 
         //Turbine
         const turbineGeometry = new THREE.CapsuleGeometry(2,20);
         const turbine = new THREE.Mesh(turbineGeometry, towerMaterial);
-        turbine.position.set(0,25,22)
+        turbine.position.set(0,25,22);
         turbine.castShadow = true;
+        turbine.receiveShadow = true;
         turbine.rotation.z = Math.PI / 2;
-        this.add(turbine);
+
+
+        const turbine2 = turbine.clone();
+        turbine2.position.set(0,25,-22);
+
+
+        this.add(turbine, turbine2);
 
 
         // Blade Arm
@@ -134,6 +173,8 @@ export default class PowerStation extends THREE.Group {
         const arm = new THREE.Mesh(armGeometry, towerMaterial);
         arm.position.set(0 , 24, 0);
         arm.castShadow = true;
+        arm.receiveShadow = true;
+
 
         const length = 64, width = 8;
 
@@ -165,6 +206,7 @@ export default class PowerStation extends THREE.Group {
         const armHolder = new THREE.Mesh(armHolderGeometry, towerMaterial);
         armHolder.position.set(32, 4, 3);
         armHolder.castShadow = true;
+        armHolder.receiveShadow = true;
         armHolder.name = 'armHolder';
 
         bladeArm.add(armHolder);
@@ -191,15 +233,15 @@ export default class PowerStation extends THREE.Group {
 
         //Blades mit BufferGeoemtry
         const positions = [
-            1, 0, 0, //0
-            0, 0, 2, //1
-            1, 15, 0, //2
-            0, 15, 2, //3
+            1, 1, 0, //0
+            0, 0, 3, //1
+            1, 20, 2, //2
+            0.75, 20, 3, //3
 
-            1, 0, 0, //4
-            2, 0, 2, //5
-            1, 15, 0, //6
-            2, 15, 2, //7
+            1, 1, 0, //4
+            2, 0, 3, //5
+            1, 20, 2, //6
+            1.25, 20, 3, //7
         ];
 
         const indices = [
@@ -224,15 +266,27 @@ export default class PowerStation extends THREE.Group {
 
         ];
 
+
+
+
         const bladeGeometry = new THREE.BufferGeometry();
         bladeGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
         bladeGeometry.setIndex(indices);
         bladeGeometry.computeVertexNormals();
         const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
         blade.castShadow = true;
+        blade.receiveShadow = true;
         blade.position.set(0,20,40);
         this.add(blade);
 
+
+        //Rundung blade
+        const rundBladeGeometry = new THREE.CylinderGeometry(0.25,1,21.95,25);
+        const rundBlade = new THREE.Mesh(rundBladeGeometry, bladeMaterial);
+        rundBlade.position.set(1, 29, 43);
+        rundBlade.castShadow = true;
+        rundBlade.receiveShadow = true;
+        this.add(rundBlade);
         // Blade Arm Animation
         // -------------------
         bladeArm.tweenAnimationUp = new TWEEN.Tween(bladeArm.position).to(new THREE.Vector3(
