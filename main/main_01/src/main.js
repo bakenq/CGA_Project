@@ -12,6 +12,8 @@ import TableFromFile from './objects/TableFromFile.js';
 import PlantFromFile from './objects/PlantFromFile.js';
 import Floor from './objects/Floor.js';
 import Physics from './physics/Physics.js';
+import {blades} from "./eventfunctions/executeRaycast.js";
+
 
 // Event functions
 import {updateAspectRatio} from './eventfunctions/updateAspectRatio.js';
@@ -58,12 +60,19 @@ function main() {
   const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
   blade.position.set(-8, 24, -22);
   blade.castShadow = true;
-  window.scene.add(blade)
+  blade.name = 'blades';
+  window.scene.add(blade);
 
+  const blade2 = blade.clone();
+  blade2.position.set(-8, 24, 22);
+  window.scene.add(blade2)
+
+  /*
   const blade2 = new THREE.Mesh(bladeGeometry, bladeMaterial);
   blade2.position.set(-8, 24, 22);
   blade2.castShadow = true;
   window.scene.add(blade2)
+   */
 
 
   // Floor
@@ -111,17 +120,21 @@ function main() {
 
     const delta = clock.getDelta();
 
+    // Update the blade's rotation
+    if (blades) {
+      blade.rotation.x += 0.01;
+      blade.rotation.y += 0.01;
+
+      blade2.rotation.x += 0.01;
+      blade2.rotation.y += 0.01;
+    }
+
+
+    TWEEN.update();
+
     window.physics.update(delta);
 
     window.renderer.render(window.scene, window.camera);
-    // Update the wind wheel's rotation
-    blade.rotation.x += 0.01;
-    blade.rotation.y += 0.01;
-
-    blade2.rotation.x += 0.01;
-    blade2.rotation.y += 0.01;
-
-
 
     stats.end();
     requestAnimationFrame(mainLoop);
@@ -132,3 +145,4 @@ function main() {
 
 window.onload = main;
 window.onresize = updateAspectRatio;
+window.onclick = executeRaycast;

@@ -22,6 +22,7 @@ export default class PowerStation extends THREE.Group {
     addParts() {
 
         // Materials
+        //----------
         const baseMaterial = new THREE.MeshPhongMaterial({
             color: 0x808080,
             flatShading: false,
@@ -45,6 +46,7 @@ export default class PowerStation extends THREE.Group {
 
 
         // Geometry
+        //---------
 
         // Base
         const baseGeometry = new THREE.CylinderGeometry(8, 8, 16, 32);
@@ -124,7 +126,7 @@ export default class PowerStation extends THREE.Group {
         turbine.position.set(0,25,22)
         turbine.castShadow = true;
         turbine.rotation.z = Math.PI / 2;
-        //this.add(turbine);
+        this.add(turbine);
 
 
         // Blade Arm
@@ -157,13 +159,16 @@ export default class PowerStation extends THREE.Group {
         bladeArm.position.set(-3, 20, 32);
         bladeArm.rotation.y = Math.PI / 2;
         bladeArm.castShadow = true;
+        bladeArm.name = 'bladeArm';
 
         const armHolderGeometry = new THREE.CylinderGeometry(7, 7, 12, 32);
         const armHolder = new THREE.Mesh(armHolderGeometry, towerMaterial);
         armHolder.position.set(32, 4, 3);
         armHolder.castShadow = true;
+        armHolder.name = 'armHolder';
 
         bladeArm.add(armHolder);
+
         this.add(bladeArm);
 
 
@@ -228,6 +233,20 @@ export default class PowerStation extends THREE.Group {
         blade.position.set(0,20,40);
         this.add(blade);
 
+        // Blade Arm Animation
+        // -------------------
+        bladeArm.tweenAnimationUp = new TWEEN.Tween(bladeArm.position).to(new THREE.Vector3(
+            bladeArm.position.x,
+            bladeArm.position.y + 29,
+            bladeArm.position.z),
+        2000).easing(TWEEN.Easing.Quadratic.Out);
+
+        bladeArm.tweenAnimationDown = new TWEEN.Tween(bladeArm.position).to(new THREE.Vector3(
+                bladeArm.position.x,
+                bladeArm.position.y,
+                bladeArm.position.z),
+            2000).easing(TWEEN.Easing.Quadratic.Out);
+        bladeArm.up = false;
 
     }
 }
