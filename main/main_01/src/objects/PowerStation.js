@@ -6,6 +6,20 @@ import {GridShader} from '../shaders/GridShader.js';
 
 import {Animation, AnimationType, AnimationAxis} from '../animation/Animation.js';
 
+// Export Variablen
+const bladeMaterial = new THREE.MeshPhongMaterial({
+    color: 0xd3d3d3,
+    flatShading: false,
+    specular: 0x111111,
+    shininess: 100,
+    side: THREE.DoubleSide
+});
+
+const bladeGeometryOld = new THREE.CylinderGeometry(2, 2, 32, 32);
+const bladeOld = new THREE.Mesh(bladeGeometryOld, bladeMaterial);
+bladeOld.castShadow = true;
+bladeOld.name = 'blades';
+const blade2Old = bladeOld.clone();
 
 export default class PowerStation extends THREE.Group {
 
@@ -37,13 +51,7 @@ export default class PowerStation extends THREE.Group {
             shininess: 100
         });
 
-        const bladeMaterial = new THREE.MeshPhongMaterial({
-            color: 0xd3d3d3,
-            flatShading: false,
-            specular: 0x111111,
-            shininess: 100,
-            side: THREE.DoubleSide
-        });
+
 
 
         // Geometry
@@ -155,17 +163,18 @@ export default class PowerStation extends THREE.Group {
         //Turbine
         const turbineGeometry = new THREE.CapsuleGeometry(2,20);
         const turbine = new THREE.Mesh(turbineGeometry, towerMaterial);
-        turbine.position.set(0,25,22);
+        turbine.position.set(54,4.5,3);
         turbine.castShadow = true;
         turbine.receiveShadow = true;
         turbine.rotation.z = Math.PI / 2;
+        turbine.rotation.y = Math.PI / 2;
 
 
         const turbine2 = turbine.clone();
-        turbine2.position.set(0,25,-22);
+        turbine2.position.set(10,4.5,3);
 
 
-        this.add(turbine, turbine2);
+        //this.add(turbine, turbine2);
 
 
         // Blade Arm
@@ -210,11 +219,32 @@ export default class PowerStation extends THREE.Group {
         armHolder.name = 'armHolder';
 
         bladeArm.add(armHolder);
+        bladeArm.add(turbine);
+        bladeArm.add(turbine2);
+        bladeArm.add(bladeOld);
+        bladeArm.add(blade2Old);
 
         this.add(bladeArm);
 
 
         // Blades
+
+        // Variablen ganz Oben
+
+
+        bladeOld.position.set(54, 4.5, -7);
+        bladeOld.rotation.z = Math.PI / 2;
+
+        //this.add(bladeOld);
+
+
+        blade2Old.position.set(10, 4.5, -7);
+        blade2Old.rotation.z = Math.PI / 2;
+        //this.add(blade2Old)
+
+        //this.add(bladeArmGroup);
+
+
         /*
         const bladeGeometry = new THREE.CylinderGeometry(2, 2, 32, 32);
         const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
@@ -287,13 +317,15 @@ export default class PowerStation extends THREE.Group {
         rundBlade.castShadow = true;
         rundBlade.receiveShadow = true;
         this.add(rundBlade);
+
+
         // Blade Arm Animation
         // -------------------
         bladeArm.tweenAnimationUp = new TWEEN.Tween(bladeArm.position).to(new THREE.Vector3(
             bladeArm.position.x,
             bladeArm.position.y + 29,
             bladeArm.position.z),
-        2000).easing(TWEEN.Easing.Quadratic.Out);
+            2000).easing(TWEEN.Easing.Quadratic.Out);
 
         bladeArm.tweenAnimationDown = new TWEEN.Tween(bladeArm.position).to(new THREE.Vector3(
                 bladeArm.position.x,
@@ -304,3 +336,6 @@ export default class PowerStation extends THREE.Group {
 
     }
 }
+
+export {bladeOld};
+export {blade2Old};

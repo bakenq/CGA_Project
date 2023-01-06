@@ -12,7 +12,10 @@ import TableFromFile from './objects/TableFromFile.js';
 import PlantFromFile from './objects/PlantFromFile.js';
 import Floor from './objects/Floor.js';
 import Physics from './physics/Physics.js';
+
 import {blades} from "./eventfunctions/executeRaycast.js";
+import {bladeOld} from "./objects/PowerStation.js";
+import {blade2Old} from "./objects/PowerStation.js";
 
 
 // Event functions
@@ -49,6 +52,7 @@ function main() {
 
   // Blades
   // weil ich noch nicht weiß wie ich die Animation in der externen Datei mache
+  /*
   const bladeMaterial = new THREE.MeshPhongMaterial({
     color: 0xd3d3d3,
     flatShading: true,
@@ -66,6 +70,8 @@ function main() {
   const blade2 = blade.clone();
   blade2.position.set(-8, 24, 22);
   window.scene.add(blade2)
+
+   */
 
   /*
   const blade2 = new THREE.Mesh(bladeGeometry, bladeMaterial);
@@ -122,11 +128,9 @@ function main() {
 
     // Update the blade's rotation
     if (blades) {
-      blade.rotation.x += 0.01;
-      blade.rotation.y += 0.01;
+      bladeOld.rotation.z += 0.01;
 
-      blade2.rotation.x += 0.01;
-      blade2.rotation.y += 0.01;
+      blade2Old.rotation.z += 0.01;
     }
 
 

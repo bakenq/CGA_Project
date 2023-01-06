@@ -3,6 +3,7 @@ import * as THREE from 'three';
 window.raycaster = new THREE.Raycaster();
 
 let blades = false;
+let armDown = true;
 
 export function executeRaycast(event) {
 
@@ -21,12 +22,18 @@ export function executeRaycast(event) {
       if (firstHit.up) {
         firstHit.tweenAnimationDown.stop();
         firstHit.tweenAnimationUp.start();
+        armDown = false;
+        blades = false;
       } else {
         firstHit.tweenAnimationUp.stop();
         firstHit.tweenAnimationDown.start();
+        armDown = true;
       }
     } else if (firstHit.name === 'blades') {
-      blades = !blades;
+      if (armDown) {
+        blades = !blades;
+      }
+
     }
 
   }
