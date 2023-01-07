@@ -50,6 +50,18 @@ export default class PowerStation extends THREE.Group {
             specular: 0x111111,
             shininess: 100
         });
+        const towerFlatMaterial = new THREE.MeshPhongMaterial({
+            color: 0xe5de00,
+            flatShading: true,
+            specular: 0x111111,
+            shininess: 100
+        });
+        const roofTextured = new THREE.MeshPhongMaterial({
+            color: 0xe5de00,
+            flatShading: true,
+            map: new THREE.TextureLoader().load('src/images/Roof.png'),
+            side: THREE.DoubleSide
+        })
 
         const rescueRingMaterial = new THREE.MeshPhongMaterial({
             color: 0xa83236,
@@ -93,8 +105,8 @@ export default class PowerStation extends THREE.Group {
 
 
         // TowerTop
-        const towerTopGeometry = new THREE.CylinderGeometry(8,8,10,8);
-        const towerTop = new THREE.Mesh(towerTopGeometry, towerMaterial);
+        const towerTopGeometry = new THREE.CylinderGeometry(8,8,10,6);
+        const towerTop = new THREE.Mesh(towerTopGeometry, towerFlatMaterial);
         towerTop.position.set(0,65,0);
         towerTop.castShadow = true;
         towerTop.receiveShadow = true;
@@ -152,8 +164,9 @@ export default class PowerStation extends THREE.Group {
 
 
         //Tower Top Roof
-        const towerTopRoofGeometry = new THREE.CylinderGeometry(1,8,8,8);
-        const towerTopRoof = new THREE.Mesh(towerTopRoofGeometry, towerMaterial);
+        const towerTopRoofGeometry = new THREE.CylinderGeometry(1,8,8,6);
+        //const towerTopRoof = new THREE.Mesh(towerTopRoofGeometry, towerMaterial);
+        const towerTopRoof = new THREE.Mesh(towerTopRoofGeometry, [roofTextured, towerFlatMaterial, towerFlatMaterial])
         towerTopRoof.position.set(0,74,0);
         towerTopRoof.castShadow = true;
         towerTopRoof.receiveShadow = true;

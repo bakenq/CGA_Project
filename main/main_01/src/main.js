@@ -129,7 +129,6 @@ function main() {
     // Update the blade's rotation
     if (blades) {
       bladeOld.rotation.z -= 1 * delta;
-
       blade2Old.rotation.z += 1 * delta;
     }
 
