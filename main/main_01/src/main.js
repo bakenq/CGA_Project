@@ -12,6 +12,7 @@ import TableFromFile from './objects/TableFromFile.js';
 import PlantFromFile from './objects/PlantFromFile.js';
 import Floor from './objects/Floor.js';
 import Physics from './physics/Physics.js';
+import PowerStationFromFile from './objects/PowerStationFromFile.js';
 
 import {blades} from "./eventfunctions/executeRaycast.js";
 import {bladeOld} from "./objects/PowerStation.js";
@@ -49,6 +50,11 @@ function main() {
   const powerStation = new PowerStation();
   powerStation.position.set(0, 0, 0);
   window.scene.add(powerStation);
+
+  //Powerstationfromfile
+  const powerStationFromFile = new PowerStationFromFile();
+  powerStationFromFile.position.set(0, 0, 40);
+  window.scene.add(powerStationFromFile);
 
   // Blades
   // weil ich noch nicht weiß wie ich die Animation in der externen Datei mache
