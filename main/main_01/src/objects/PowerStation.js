@@ -43,6 +43,11 @@ export default class PowerStation extends THREE.Group {
             specular: 0x111111,
             shininess: 100
         });
+        const baseTextured = new THREE.MeshPhongMaterial({
+            color: 0x808080,
+            flatShading: false,
+            map: new THREE.TextureLoader().load('src/images/Rust.png'),
+        });
 
         const towerMaterial = new THREE.MeshPhongMaterial({
             color: 0xe5de00,
@@ -61,7 +66,7 @@ export default class PowerStation extends THREE.Group {
             flatShading: true,
             map: new THREE.TextureLoader().load('src/images/Roof.png'),
             side: THREE.DoubleSide
-        })
+        });
 
         const rescueRingMaterial = new THREE.MeshPhongMaterial({
             color: 0xa83236,
@@ -78,7 +83,7 @@ export default class PowerStation extends THREE.Group {
 
         // Base
         const baseGeometry = new THREE.CylinderGeometry(8, 8, 16, 32);
-        const base = new THREE.Mesh(baseGeometry, baseMaterial);
+        const base = new THREE.Mesh(baseGeometry, [baseTextured, baseMaterial, baseMaterial]);
         base.position.set(0, 8, 0);
         base.castShadow = true;
         base.receiveShadow = true;
