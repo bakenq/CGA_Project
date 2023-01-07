@@ -51,6 +51,13 @@ export default class PowerStation extends THREE.Group {
             shininess: 100
         });
 
+        const rescueRingMaterial = new THREE.MeshPhongMaterial({
+            color: 0xa83236,
+            flatShading: false,
+            specular: 0x111111,
+            shininess: 100
+        });
+
 
 
 
@@ -317,6 +324,13 @@ export default class PowerStation extends THREE.Group {
         rundBlade.castShadow = true;
         rundBlade.receiveShadow = true;
         this.add(rundBlade);
+
+        // Rescue Ring
+        const rescueRingGeometry = new THREE.TorusBufferGeometry(2, 0.75, 16, 48);
+        const rescueRing = new THREE.Mesh(rescueRingGeometry, rescueRingMaterial);
+        rescueRing.position.set(-3, 63.5, -7.5);
+        rescueRing.rotation.y = Math.PI / 6;
+        this.add(rescueRing);
 
 
         // Blade Arm Animation
