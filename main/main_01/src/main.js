@@ -15,8 +15,11 @@ import Physics from './physics/Physics.js';
 import PowerStationFromFile from './objects/PowerStationFromFile.js';
 
 import {blades} from "./eventfunctions/executeRaycast.js";
-import {bladeOld} from "./objects/PowerStation.js";
-import {blade2Old} from "./objects/PowerStation.js";
+//import {bladeOld} from "./objects/PowerStation.js";
+//import {blade2Old} from "./objects/PowerStation.js";
+//import {pivotpoint} from "./objects/PowerStation.js";
+import {completeBladeRight} from "./objects/PowerStation.js";
+import {completeBladeLeft} from "./objects/PowerStation.js";
 
 
 // Event functions
@@ -53,8 +56,10 @@ function main() {
 
   //Powerstationfromfile
   const powerStationFromFile = new PowerStationFromFile();
-  powerStationFromFile.position.set(0, 0, 40);
-  window.scene.add(powerStationFromFile);
+  powerStationFromFile.scale.set(7.5,7.5,7.5);
+  powerStationFromFile.position.set(0, 0, 70);
+  //powerStationFromFile.rotation.set()
+  //window.scene.add(powerStationFromFile);
 
   // Blades
   // weil ich noch nicht weiß wie ich die Animation in der externen Datei mache
@@ -134,9 +139,10 @@ function main() {
 
     // Update the blade's rotation
     if (blades) {
-      bladeOld.rotation.z -= 1 * delta;
-      blade2Old.rotation.z += 1 * delta;
+      //bladeOld.rotation.z -= 1 * delta;
+      //blade2Old.rotation.z += 1 * delta;
     }
+    //pivotpoint.rotation.x -= 1 * delta;
 
 
     TWEEN.update();

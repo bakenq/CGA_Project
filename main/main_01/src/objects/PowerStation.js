@@ -14,12 +14,105 @@ const bladeMaterial = new THREE.MeshPhongMaterial({
     shininess: 100,
     side: THREE.DoubleSide
 });
-
+/*
 const bladeGeometryOld = new THREE.CylinderGeometry(2, 2, 32, 32);
 const bladeOld = new THREE.Mesh(bladeGeometryOld, bladeMaterial);
 bladeOld.castShadow = true;
 bladeOld.name = 'blades';
 const blade2Old = bladeOld.clone();
+*/
+//------------------------Blades----------------------
+
+
+//Blades mit BufferGeoemtry
+const positions = [
+    1, 1, 0, //0
+    0, 0, 3, //1
+    1, 20, 2, //2
+    0.75, 20, 3, //3
+
+    1, 1, 0, //4
+    2, 0, 3, //5
+    1, 20, 2, //6
+    1.25, 20, 3, //7
+];
+
+const indices = [
+    2,0,1, //Seite 1 1/2
+    1,3,2, //Seite 1 2/2
+
+    6,2,3, //Top 1/2
+    3,7,6, //Top 2/2
+
+    6,4,5, //Seite 2 1/2
+    5,7,6, //Seite 2 2/2
+
+    4,0,1, //bot 1/2
+    1,5,4, //bot 2/2
+
+    3,1,5, //Front 1/2
+    5,7,3,  //Front 2/2
+
+    6,4,0, //Back 1/2
+    0,2,6  //Back 2/2
+
+
+];
+
+
+
+
+const bladeGeometry = new THREE.BufferGeometry();
+bladeGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
+bladeGeometry.setIndex(indices);
+bladeGeometry.computeVertexNormals();
+const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
+blade.castShadow = true;
+blade.receiveShadow = true;
+blade.position.set(0,0,0);
+//this.add(blade);
+
+
+//Rundung blade
+const rundBladeGeometry = new THREE.CylinderGeometry(0.25,1,21.95,25);
+const rundBlade = new THREE.Mesh(rundBladeGeometry, bladeMaterial);
+rundBlade.position.set(1, 9, 3);
+rundBlade.castShadow = true;
+rundBlade.receiveShadow = true;
+//this.add(rundBlade);
+
+//Blade Up Right
+const bladeGroupRU = new THREE.Group();
+bladeGroupRU.add(rundBlade,blade);
+bladeGroupRU.position.set(-9, 28, 19);
+bladeGroupRU.name = 'blades';
+
+//Blade Down Right
+const bladeGroupRD = bladeGroupRU.clone();
+bladeGroupRD.position.set(-9, 21, 25);
+bladeGroupRD.rotation.x = Math.PI;
+
+//2 Blades Right Group
+const completeBladeRight = new THREE.Group();
+completeBladeRight.add(bladeGroupRD,bladeGroupRU);
+//this.add(completeBladeRight);
+
+//2 Blades left Clone
+const completeBladeLeft = completeBladeRight.clone();
+completeBladeLeft.position.set(0,0,-44);
+//this.add(completeBladeLeft);
+
+/*
+        //Set Pivot for Rotation
+        const pivotpoint = new THREE.Group();
+        pivotpoint.add(bladeGroupRD);
+        pivotpoint.position.set(-8, 19, 3);
+       // pivotpoint.rotation.x = Math.PI;
+
+*/
+
+
+//--------------------------end------------------
 
 export default class PowerStation extends THREE.Group {
 
@@ -34,6 +127,12 @@ export default class PowerStation extends THREE.Group {
     }
 
     addParts() {
+        //adding blades
+
+        this.add(completeBladeLeft);
+        this.add(completeBladeRight);
+
+        // this.add(pivotpoint);
 
         // Materials
         //----------
@@ -246,10 +345,15 @@ export default class PowerStation extends THREE.Group {
         bladeArm.add(armHolder);
         bladeArm.add(turbine);
         bladeArm.add(turbine2);
-        bladeArm.add(bladeOld);
-        bladeArm.add(blade2Old);
+        //bladeArm.add(bladeOld);
+        //bladeArm.add(blade2Old);
 
         this.add(bladeArm);
+
+
+        // completeBladeRight.position.set(-9, 28, 19);
+        // completeBladeLeft.position.set(0,0,-44);
+
 
 
         // Blades
@@ -257,14 +361,14 @@ export default class PowerStation extends THREE.Group {
         // Variablen ganz Oben
 
 
-        bladeOld.position.set(54, 4.5, -7);
-        bladeOld.rotation.z = Math.PI / 2;
+        //bladeOld.position.set(54, 4.5, -7);
+        //bladeOld.rotation.z = Math.PI / 2;
 
         //this.add(bladeOld);
 
 
-        blade2Old.position.set(10, 4.5, -7);
-        blade2Old.rotation.z = Math.PI / 2;
+        //blade2Old.position.set(10, 4.5, -7);
+        //blade2Old.rotation.z = Math.PI / 2;
         //this.add(blade2Old)
 
         //this.add(bladeArmGroup);
@@ -284,64 +388,95 @@ export default class PowerStation extends THREE.Group {
 
          */
 
+        /*
+
+            //Blades mit BufferGeoemtry
+            const positions = [
+                1, 1, 0, //0
+                0, 0, 3, //1
+                1, 20, 2, //2
+                0.75, 20, 3, //3
+
+                1, 1, 0, //4
+                2, 0, 3, //5
+                1, 20, 2, //6
+                1.25, 20, 3, //7
+            ];
+
+            const indices = [
+                2,0,1, //Seite 1 1/2
+                1,3,2, //Seite 1 2/2
+
+                6,2,3, //Top 1/2
+                3,7,6, //Top 2/2
+
+                6,4,5, //Seite 2 1/2
+                5,7,6, //Seite 2 2/2
+
+                4,0,1, //bot 1/2
+                1,5,4, //bot 2/2
+
+                3,1,5, //Front 1/2
+                5,7,3,  //Front 2/2
+
+                6,4,0, //Back 1/2
+                0,2,6  //Back 2/2
 
 
-        //Blades mit BufferGeoemtry
-        const positions = [
-            1, 1, 0, //0
-            0, 0, 3, //1
-            1, 20, 2, //2
-            0.75, 20, 3, //3
-
-            1, 1, 0, //4
-            2, 0, 3, //5
-            1, 20, 2, //6
-            1.25, 20, 3, //7
-        ];
-
-        const indices = [
-            2,0,1, //Seite 1 1/2
-            1,3,2, //Seite 1 2/2
-
-            6,2,3, //Top 1/2
-            3,7,6, //Top 2/2
-
-            6,4,5, //Seite 2 1/2
-            5,7,6, //Seite 2 2/2
-
-            4,0,1, //bot 1/2
-            1,5,4, //bot 2/2
-
-            3,1,5, //Front 1/2
-            5,7,3,  //Front 2/2
-
-            6,4,0, //Back 1/2
-            0,2,6  //Back 2/2
-
-
-        ];
+            ];
 
 
 
 
-        const bladeGeometry = new THREE.BufferGeometry();
-        bladeGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
-        bladeGeometry.setIndex(indices);
-        bladeGeometry.computeVertexNormals();
-        const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
-        blade.castShadow = true;
-        blade.receiveShadow = true;
-        blade.position.set(0,20,40);
-        this.add(blade);
+            const bladeGeometry = new THREE.BufferGeometry();
+            bladeGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
+            bladeGeometry.setIndex(indices);
+            bladeGeometry.computeVertexNormals();
+            const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
+            blade.castShadow = true;
+            blade.receiveShadow = true;
+            blade.position.set(0,0,0);
+            //this.add(blade);
 
 
-        //Rundung blade
-        const rundBladeGeometry = new THREE.CylinderGeometry(0.25,1,21.95,25);
-        const rundBlade = new THREE.Mesh(rundBladeGeometry, bladeMaterial);
-        rundBlade.position.set(1, 29, 43);
-        rundBlade.castShadow = true;
-        rundBlade.receiveShadow = true;
-        this.add(rundBlade);
+            //Rundung blade
+            const rundBladeGeometry = new THREE.CylinderGeometry(0.25,1,21.95,25);
+            const rundBlade = new THREE.Mesh(rundBladeGeometry, bladeMaterial);
+            rundBlade.position.set(1, 9, 3);
+            rundBlade.castShadow = true;
+            rundBlade.receiveShadow = true;
+            //this.add(rundBlade);
+
+            //Blade Up Right
+            const bladeGroupRU = new THREE.Group();
+            bladeGroupRU.add(blade,rundBlade);
+
+            bladeGroupRU.position.set(-9, 28, 19);
+
+            bladeGroupRU.name = 'blades';
+
+            //Blade Down Right
+            const bladeGroupRD = bladeGroupRU.clone();
+            bladeGroupRD.position.set(-9, 21, 25);
+            bladeGroupRD.rotation.x = Math.PI;
+
+            //2 Blades Right Group
+            const completeBladeRight = new THREE.Group();
+            completeBladeRight.add(bladeGroupRD,bladeGroupRU);
+            this.add(completeBladeRight);
+
+            //2 Blades left
+            const completeBladeLeft = completeBladeRight.clone();
+
+            completeBladeLeft.position.set(0,0,-44);
+
+
+            this.add(completeBladeLeft);
+
+
+            */
+
+
 
         // Rescue Ring
         const rescueRingGeometry = new THREE.TorusBufferGeometry(2, 0.75, 16, 48);
@@ -354,9 +489,9 @@ export default class PowerStation extends THREE.Group {
         // Blade Arm Animation
         // -------------------
         bladeArm.tweenAnimationUp = new TWEEN.Tween(bladeArm.position).to(new THREE.Vector3(
-            bladeArm.position.x,
-            bladeArm.position.y + 29,
-            bladeArm.position.z),
+                bladeArm.position.x,
+                bladeArm.position.y + 29,
+                bladeArm.position.z),
             2000).easing(TWEEN.Easing.Quadratic.Out);
 
         bladeArm.tweenAnimationDown = new TWEEN.Tween(bladeArm.position).to(new THREE.Vector3(
@@ -367,7 +502,13 @@ export default class PowerStation extends THREE.Group {
         bladeArm.up = false;
 
     }
+
 }
 
-export {bladeOld};
-export {blade2Old};
+
+
+//export {pivotpoint};
+export {completeBladeLeft};
+export {completeBladeRight};
+//export {bladeOld};
+//export {blade2Old};
