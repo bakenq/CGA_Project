@@ -17,9 +17,8 @@ import PowerStationFromFile from './objects/PowerStationFromFile.js';
 import {blades} from "./eventfunctions/executeRaycast.js";
 //import {bladeOld} from "./objects/PowerStation.js";
 //import {blade2Old} from "./objects/PowerStation.js";
-//import {pivotpoint} from "./objects/PowerStation.js";
-import {completeBladeRight} from "./objects/PowerStation.js";
-import {completeBladeLeft} from "./objects/PowerStation.js";
+import {pivotpoint} from "./objects/PowerStation.js";
+import {pivotpoint2} from "./objects/PowerStation.js";
 
 
 // Event functions
@@ -141,8 +140,12 @@ function main() {
     if (blades) {
       //bladeOld.rotation.z -= 1 * delta;
       //blade2Old.rotation.z += 1 * delta;
+      pivotpoint.rotation.z += 1 * delta;
+      pivotpoint2.rotation.z -= 1 * delta;
+
     }
-    //pivotpoint.rotation.x -= 1 * delta;
+
+
 
 
     TWEEN.update();

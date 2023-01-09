@@ -21,6 +21,7 @@ bladeOld.castShadow = true;
 bladeOld.name = 'blades';
 const blade2Old = bladeOld.clone();
 */
+
 //------------------------Blades----------------------
 
 
@@ -79,37 +80,36 @@ const rundBlade = new THREE.Mesh(rundBladeGeometry, bladeMaterial);
 rundBlade.position.set(1, 9, 3);
 rundBlade.castShadow = true;
 rundBlade.receiveShadow = true;
+rundBlade.name = 'blades';
 //this.add(rundBlade);
 
 //Blade Up Right
 const bladeGroupRU = new THREE.Group();
 bladeGroupRU.add(rundBlade,blade);
-bladeGroupRU.position.set(-9, 28, 19);
-bladeGroupRU.name = 'blades';
+//bladeGroupRU.position.set(-9, 28, 19);
+bladeGroupRU.position.set(-3, 3.5, -1.75);
+bladeGroupRU.rotation.y = 4 / Math.PI;
+//bladeGroupRU.name = 'blades';
 
 //Blade Down Right
 const bladeGroupRD = bladeGroupRU.clone();
-bladeGroupRD.position.set(-9, 21, 25);
+//bladeGroupRD.position.set(-9, 21, 25);
+bladeGroupRD.position.set(2.75, -3.5, 0);
 bladeGroupRD.rotation.x = Math.PI;
+bladeGroupRD.rotation.y = -4 / Math.PI;
 
-//2 Blades Right Group
-const completeBladeRight = new THREE.Group();
-completeBladeRight.add(bladeGroupRD,bladeGroupRU);
-//this.add(completeBladeRight);
 
-//2 Blades left Clone
-const completeBladeLeft = completeBladeRight.clone();
-completeBladeLeft.position.set(0,0,-44);
-//this.add(completeBladeLeft);
+//Set Pivot for Rotation
+const pivotpoint = new THREE.Group();
+pivotpoint.add(bladeGroupRD, bladeGroupRU);
+pivotpoint.position.set(53.75, 4.5, -5);
+//pivotpoint.rotation.y = Math.PI;
 
-/*
-        //Set Pivot for Rotation
-        const pivotpoint = new THREE.Group();
-        pivotpoint.add(bladeGroupRD);
-        pivotpoint.position.set(-8, 19, 3);
-       // pivotpoint.rotation.x = Math.PI;
+const pivotpoint2 = pivotpoint.clone();
+pivotpoint2.position.set(9.75, 4.5, -5);
 
-*/
+
+
 
 
 //--------------------------end------------------
@@ -129,10 +129,11 @@ export default class PowerStation extends THREE.Group {
     addParts() {
         //adding blades
 
-        this.add(completeBladeLeft);
-        this.add(completeBladeRight);
+        //this.add(completeBladeLeft);
+        //this.add(completeBladeRight);
 
-        // this.add(pivotpoint);
+        //this.add(pivotpoint);
+        //this.add(pivotpoint2);
 
         // Materials
         //----------
@@ -345,6 +346,8 @@ export default class PowerStation extends THREE.Group {
         bladeArm.add(armHolder);
         bladeArm.add(turbine);
         bladeArm.add(turbine2);
+        bladeArm.add(pivotpoint);
+        bladeArm.add(pivotpoint2);
         //bladeArm.add(bladeOld);
         //bladeArm.add(blade2Old);
 
@@ -507,8 +510,7 @@ export default class PowerStation extends THREE.Group {
 
 
 
-//export {pivotpoint};
-export {completeBladeLeft};
-export {completeBladeRight};
+export {pivotpoint};
+export {pivotpoint2};
 //export {bladeOld};
 //export {blade2Old};
