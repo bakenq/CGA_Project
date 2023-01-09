@@ -59,6 +59,7 @@ function main() {
   powerStationFromFile.scale.set(7.5,7.5,7.5);
   powerStationFromFile.position.set(0, 0, 70);
   powerStationFromFile.rotation.y = Math.PI;
+  powerStationFromFile.addPhysics();
   window.scene.add(powerStationFromFile);
 
   // Blades
