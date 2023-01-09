@@ -39,7 +39,7 @@ function main() {
   window.renderer.setClearColor(0xffffff);
   window.renderer.shadowMap.enabled = true;
 
-  window.physics = new Physics();
+  window.physics = new Physics(true);
   window.physics.setup(0, -200, 0, 1 / 240, true);
 
   window.audioListener = new THREE.AudioListener();
@@ -51,14 +51,15 @@ function main() {
   // Power Station
   const powerStation = new PowerStation();
   powerStation.position.set(0, 0, 0);
+  powerStation.addPhysics();
   window.scene.add(powerStation);
 
   //Powerstationfromfile
   const powerStationFromFile = new PowerStationFromFile();
   powerStationFromFile.scale.set(7.5,7.5,7.5);
   powerStationFromFile.position.set(0, 0, 70);
-  //powerStationFromFile.rotation.set()
-  //window.scene.add(powerStationFromFile);
+  powerStationFromFile.rotation.y = Math.PI;
+  window.scene.add(powerStationFromFile);
 
   // Blades
   // weil ich noch nicht weiß wie ich die Animation in der externen Datei mache
@@ -140,9 +141,8 @@ function main() {
     if (blades) {
       //bladeOld.rotation.z -= 1 * delta;
       //blade2Old.rotation.z += 1 * delta;
-      pivotpoint.rotation.z += 1 * delta;
-      pivotpoint2.rotation.z -= 1 * delta;
-
+      pivotpoint.rotation.z -= 1 * delta;
+      pivotpoint2.rotation.z += 1 * delta;
     }
 
 

@@ -20,7 +20,7 @@ export default class PowerStationFromFile extends THREE.Group {
                 }
             });
             //PowerStationFromFile.add(gltf.scene);
-            gltf.scene.position.set(0, 0, 40);
+            gltf.scene.position.set(0, 0, 0);
             thisPowerstation.add(gltf.scene);
             thisPowerstation.loadingDone = true;
         });

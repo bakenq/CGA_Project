@@ -86,7 +86,6 @@ rundBlade.name = 'blades';
 //Blade Up Right
 const bladeGroupRU = new THREE.Group();
 bladeGroupRU.add(rundBlade,blade);
-//bladeGroupRU.position.set(-9, 28, 19);
 bladeGroupRU.position.set(-3, 3.5, -1.75);
 bladeGroupRU.rotation.y = 4 / Math.PI;
 //bladeGroupRU.name = 'blades';
@@ -504,6 +503,11 @@ export default class PowerStation extends THREE.Group {
             2000).easing(TWEEN.Easing.Quadratic.Out);
         bladeArm.up = false;
 
+    }
+
+    addPhysics(){
+        window.physics.addCylinder(this,3,8, 8, 70, 32,0,35,-1,0,85,0,true);
+        window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
     }
 
 }
