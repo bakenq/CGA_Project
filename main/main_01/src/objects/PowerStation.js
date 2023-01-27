@@ -183,6 +183,15 @@ export default class PowerStation extends THREE.Group {
         });
          */
 
+        const towerBumpMaterial = new THREE.MeshStandardMaterial({
+            color: 0xe5de00,
+            flatShading: false,
+            roughness: 0.0,
+            metalness: 0.15,
+            bumpMap: new THREE.TextureLoader().load('src/images/bump.png'),
+            bumpScale: 0.1
+        })
+
         const roofTextured = new THREE.MeshStandardMaterial({
             color: 0xe5de00,
             flatShading: true,
@@ -311,7 +320,7 @@ export default class PowerStation extends THREE.Group {
 
         //Turbine
         const turbineGeometry = new THREE.CapsuleGeometry(2,20);
-        const turbine = new THREE.Mesh(turbineGeometry, towerMaterial);
+        const turbine = new THREE.Mesh(turbineGeometry, towerBumpMaterial);
         turbine.position.set(54,4.5,3);
         turbine.castShadow = true;
         turbine.receiveShadow = true;
