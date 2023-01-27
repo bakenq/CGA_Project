@@ -7,11 +7,11 @@ import {GridShader} from '../shaders/GridShader.js';
 import {Animation, AnimationType, AnimationAxis} from '../animation/Animation.js';
 
 // Export Variablen
-const bladeMaterial = new THREE.MeshPhongMaterial({
+const bladeMaterial = new THREE.MeshStandardMaterial({
     color: 0xd3d3d3,
     flatShading: false,
-    specular: 0x111111,
-    shininess: 100,
+    roughness: 0.0,
+    metalness: 0.15,
     side: THREE.DoubleSide
 });
 /*
@@ -71,6 +71,7 @@ const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
 blade.castShadow = true;
 blade.receiveShadow = true;
 blade.position.set(0,0,0);
+blade.name = 'blades';
 //this.add(blade);
 
 
@@ -88,6 +89,7 @@ const bladeGroupRU = new THREE.Group();
 bladeGroupRU.add(rundBlade,blade);
 bladeGroupRU.position.set(-3, 3.5, -1.75);
 bladeGroupRU.rotation.y = 4 / Math.PI;
+//bladeGroupRU.scale.set(0.6, 0.6, 0.6);
 //bladeGroupRU.name = 'blades';
 
 //Blade Down Right
@@ -142,27 +144,50 @@ export default class PowerStation extends THREE.Group {
             specular: 0x111111,
             shininess: 100
         });
+
         const baseTextured = new THREE.MeshPhongMaterial({
             color: 0x808080,
             flatShading: false,
             map: new THREE.TextureLoader().load('src/images/Rust.png'),
         });
 
+        /*
         const towerMaterial = new THREE.MeshPhongMaterial({
             color: 0xe5de00,
             flatShading: false,
             specular: 0x111111,
             shininess: 100
         });
+         */
+
+        const towerMaterial = new THREE.MeshStandardMaterial({
+            color: 0xe5de00,
+            flatShading: false,
+            roughness: 0.0,
+            metalness: 0.15
+        });
+
+        const towerFlatMaterial = new THREE.MeshStandardMaterial({
+            color: 0xe5de00,
+            flatShading: true,
+            roughness: 0.0,
+            metalness: 0.15
+        });
+
+        /*
         const towerFlatMaterial = new THREE.MeshPhongMaterial({
             color: 0xe5de00,
             flatShading: true,
             specular: 0x111111,
             shininess: 100
         });
-        const roofTextured = new THREE.MeshPhongMaterial({
+         */
+
+        const roofTextured = new THREE.MeshStandardMaterial({
             color: 0xe5de00,
             flatShading: true,
+            roughness: 0.0,
+            metalness: 0.15,
             map: new THREE.TextureLoader().load('src/images/Roof.png'),
             side: THREE.DoubleSide
         });
