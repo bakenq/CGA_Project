@@ -278,10 +278,22 @@ export default class PowerStation extends THREE.Group {
         const fence4 = fence.clone();
         fence4.position.set(-13.5,62.25,0);
 
+        const fence5 = fence.clone();
+        fence5.position.set(-9,62.25,10);
+
+        const fence6 = fence.clone();
+        fence6.position.set(9,62.25,10);
+
+        const fence7 = fence.clone();
+        fence7.position.set(-9,62.25,-10);
+
+        const fence8 = fence.clone();
+        fence8.position.set(9,62.25,-10);
+
 
 
         //Adding fences
-        this.add(fence, fence2, fence3, fence4);
+        this.add(fence, fence2, fence3, fence4, fence5, fence6, fence7, fence8);
 
 
         //Tower Balcony Railing (2 Parts)
