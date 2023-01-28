@@ -544,6 +544,19 @@ export default class PowerStation extends THREE.Group {
         window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
     }
 
+    addSound() {
+        const sound = new THREE.PositionalAudio(window.audioListener);
+        const audioLoader = new THREE.AudioLoader();
+        audioLoader.load('src/sounds/ocean.wav', function (buffer) {
+            sound.setBuffer(buffer);
+            sound.setRefDistance(20);
+            sound.setVolume(0.2);
+            sound.setLoop(true);
+            sound.play();
+        });
+        this.add(sound);
+    }
+
 }
 
 

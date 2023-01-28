@@ -52,6 +52,7 @@ function main() {
   const powerStation = new PowerStation();
   powerStation.position.set(0, 0, 0);
   powerStation.addPhysics();
+  powerStation.addSound();
   window.scene.add(powerStation);
 
   //Powerstationfromfile
@@ -162,6 +163,11 @@ function main() {
   mainLoop();
 }
 
-window.onload = main;
-window.onresize = updateAspectRatio;
-window.onclick = executeRaycast;
+document.getElementById("startButton").addEventListener("click", function () {
+  main();
+  document.getElementById("overlay").remove();
+  window.onresize = updateAspectRatio;
+  window.onclick = executeRaycast;
+  window.onkeydown = keyDownAction;
+  window.onkeyup = keyUpAction;
+});
