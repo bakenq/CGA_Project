@@ -15,6 +15,7 @@ import Physics from './physics/Physics.js';
 import PowerStationFromFile from './objects/PowerStationFromFile.js';
 
 import {blades} from "./eventfunctions/executeRaycast.js";
+import {armDown} from "./eventfunctions/executeRaycast.js";
 //import {bladeOld} from "./objects/PowerStation.js";
 //import {blade2Old} from "./objects/PowerStation.js";
 import {pivotpoint} from "./objects/PowerStation.js";
@@ -145,6 +146,9 @@ function main() {
       //blade2Old.rotation.z += 1 * delta;
       pivotpoint.rotation.z -= 1 * delta;
       pivotpoint2.rotation.z += 1 * delta;
+    } else if (!armDown) {
+      pivotpoint.rotation.z = 0;
+      pivotpoint2.rotation.z = 0;
     }
 
 

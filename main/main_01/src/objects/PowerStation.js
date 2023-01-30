@@ -87,7 +87,8 @@ rundBlade.name = 'blades';
 //Blade Up Right
 const bladeGroupRU = new THREE.Group();
 bladeGroupRU.add(rundBlade,blade);
-bladeGroupRU.position.set(-3, 3.5, -1.75);
+bladeGroupRU.position.set(-2.5, 3, -1.75);
+bladeGroupRU.scale.set(0.85, 0.85, 0.85);
 bladeGroupRU.rotation.y = 4 / Math.PI;
 //bladeGroupRU.scale.set(0.6, 0.6, 0.6);
 //bladeGroupRU.name = 'blades';
@@ -95,7 +96,7 @@ bladeGroupRU.rotation.y = 4 / Math.PI;
 //Blade Down Right
 const bladeGroupRD = bladeGroupRU.clone();
 //bladeGroupRD.position.set(-9, 21, 25);
-bladeGroupRD.position.set(2.75, -3.5, 0);
+bladeGroupRD.position.set(2.5, -3, 0);
 bladeGroupRD.rotation.x = Math.PI;
 bladeGroupRD.rotation.y = -4 / Math.PI;
 
