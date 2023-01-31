@@ -4,6 +4,7 @@ window.raycaster = new THREE.Raycaster();
 
 let blades = false;
 let armDown = true;
+let ArmDown = false;
 
 export function executeRaycast(event) {
 
@@ -35,8 +36,20 @@ export function executeRaycast(event) {
       }
 
     }
-
+    else {if (firstHit.name === 'Halter') {
+      firstHit.parentPowerstation.state.ArmUp = !firstHit.parentPowerstation.state.ArmUp;
+      if (firstHit.parentPowerstation.state.ArmUp) {
+        firstHit.parentPowerstation.animations.get('ArmDown').stop();
+        firstHit.parentPowerstation.animations.get('ArmUp').play();
+      } else {
+        firstHit.parentPowerstation.animations.get('ArmUp').stop();
+        firstHit.parentPowerstation.animations.get('ArmDown').play();
+      }
+    }
+    }
   }
+
 }
 export {blades};
 export {armDown};
+

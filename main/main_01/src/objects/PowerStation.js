@@ -12,7 +12,8 @@ const bladeMaterial = new THREE.MeshStandardMaterial({
     flatShading: false,
     roughness: 0.0,
     metalness: 0.15,
-    side: THREE.DoubleSide
+    side: THREE.DoubleSide,
+    //map: new THREE.TextureLoader().load('src/images/BladeMaterial.jpg')
 });
 /*
 const bladeGeometryOld = new THREE.CylinderGeometry(2, 2, 32, 32);
@@ -161,6 +162,8 @@ export default class PowerStation extends THREE.Group {
         });
          */
 
+
+
         const towerMaterial = new THREE.MeshStandardMaterial({
             color: 0xe5de00,
             flatShading: false,
@@ -189,7 +192,7 @@ export default class PowerStation extends THREE.Group {
             flatShading: false,
             roughness: 0.0,
             metalness: 0.15,
-            bumpMap: new THREE.TextureLoader().load('src/images/bump.png'),
+            bumpMap: new THREE.TextureLoader().load('src/images/newBump.jpeg'),
             bumpScale: 0.1
         })
 

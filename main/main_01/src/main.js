@@ -158,6 +158,11 @@ function main() {
 
     window.physics.update(delta);
 
+    //AnimationMixer PowerStationFromfile
+    if (powerStationFromFile.animationMixer !== null) {
+      powerStationFromFile.animationMixer.update(delta);
+    }
+
     window.renderer.render(window.scene, window.camera);
 
     stats.end();
