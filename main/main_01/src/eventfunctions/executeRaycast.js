@@ -4,7 +4,7 @@ window.raycaster = new THREE.Raycaster();
 
 let blades = false;
 let armDown = true;
-let ArmDown = true;
+let armDownBlender = true;
 
 export function executeRaycast(event) {
 
@@ -40,15 +40,20 @@ export function executeRaycast(event) {
       if (firstHit.parentPowerstation.state.ArmUp) {
         firstHit.parentPowerstation.animations.get('ArmDown').stop();
         firstHit.parentPowerstation.animations.get('ArmUp').play();
+        armDownBlender = false;
       } else {
         firstHit.parentPowerstation.animations.get('ArmUp').stop();
         firstHit.parentPowerstation.animations.get('ArmDown').play();
-        ArmDown = true;
+        armDownBlender = true;
       }
-    } else if (firstHit.name === 'BlatneuR' || 'BlatneuL' || 'Blatneu003' || 'Blatneu'){
-      if (firstHit.parentPowerstation.state.RotationBlatR) {
-        firstHit.parentPowerstation.animations.get('RotationBlatR').play();
-        firstHit.parentPowerstation.animations.get('RottionBlatL').play();
+    } else if (firstHit.name === 'BlatneuR' || 'BlatneuL' || 'Blatneu.003' || 'Blatneu'){
+      if (armDownBlender) {
+        firstHit.parentPowerstation.animations.get('RotationBlatR').stop();
+        firstHit.parentPowerstation.animations.get('RottionBlatL').stop();
+        if (firstHit.parentPowerstation.state.RotationBlatR) {
+          firstHit.parentPowerstation.animations.get('RotationBlatR').play();
+          firstHit.parentPowerstation.animations.get('RottionBlatL').play();
+        }
       }
     }
   }
