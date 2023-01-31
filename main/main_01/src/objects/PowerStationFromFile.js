@@ -20,7 +20,7 @@ export default class PowerStationFromFile extends THREE.Group {
 
     load(thisPowerstation) {
 
-        this.gltfLoader.load('src/models/PowerstationAnimationFin.gltf', function (gltf) {
+        this.gltfLoader.load('src/models/PowerstationAnimationFinal.gltf', function (gltf) {
             gltf.scene.traverse(function (child) {
                 if (child.isMesh) {
                     //console.log(child.name);
