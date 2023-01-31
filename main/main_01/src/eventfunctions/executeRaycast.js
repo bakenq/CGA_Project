@@ -17,6 +17,7 @@ export function executeRaycast(event) {
 
   if (intersects.length > 0) {
     let firstHit = intersects[0].object;
+    console.log(firstHit.name);
 
     if (firstHit.name === 'bladeArm') {
       firstHit.up = !firstHit.up;
@@ -34,9 +35,7 @@ export function executeRaycast(event) {
       if (armDown) {
         blades = !blades;
       }
-
-    }
-    else {if (firstHit.name === 'Halter') {
+    } else if (firstHit.name === 'Arm') {
       firstHit.parentPowerstation.state.ArmUp = !firstHit.parentPowerstation.state.ArmUp;
       if (firstHit.parentPowerstation.state.ArmUp) {
         firstHit.parentPowerstation.animations.get('ArmDown').stop();
@@ -45,7 +44,6 @@ export function executeRaycast(event) {
         firstHit.parentPowerstation.animations.get('ArmUp').stop();
         firstHit.parentPowerstation.animations.get('ArmDown').play();
       }
-    }
     }
   }
 

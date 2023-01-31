@@ -140,6 +140,13 @@ function main() {
 
     const delta = clock.getDelta();
 
+    //AnimationMixer PowerStationFromfile
+    if (powerStationFromFile.animationMixer !== null) {
+      powerStationFromFile.animationMixer.update(delta);
+    }
+
+    TWEEN.update();
+
     // Update the blade's rotation
     if (blades) {
       //bladeOld.rotation.z -= 1 * delta;
@@ -152,16 +159,9 @@ function main() {
     }
 
 
-
-
-    TWEEN.update();
-
     window.physics.update(delta);
 
-    //AnimationMixer PowerStationFromfile
-    if (powerStationFromFile.animationMixer !== null) {
-      powerStationFromFile.animationMixer.update(delta);
-    }
+
 
     window.renderer.render(window.scene, window.camera);
 

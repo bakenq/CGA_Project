@@ -9,7 +9,7 @@ export default class PowerStationFromFile extends THREE.Group {
         this.loadingDone = false;
         this.animationMixer = null;
         this.animations = new Map();
-        this.state ={
+        this.state = {
             ArmUp: false,
             ArmDown: false,
             RottionBlatL: false,
@@ -28,14 +28,17 @@ export default class PowerStationFromFile extends THREE.Group {
                     child.receiveShadow = true;
                     child.castShadow = true;
                 }
-                thisPowerstation.animationMixer = new THREE.AnimationMixer(gltf.scene);
-                for (let i = 0; i < gltf.animations.length; i++){
-                    let action = thisPowerstation.animationMixer.clipAction(gltf.animations[i]);
-                    action.clampWhenFinished = true;
-                    action.setLoop(THREE.LoopOnce);
-                    thisPowerstation.animations.set(gltf.animations[i].name, action);
-                }
             });
+
+            thisPowerstation.animationMixer = new THREE.AnimationMixer(gltf.scene);
+            for (let i = 0; i < gltf.animations.length; i++){
+                let action = thisPowerstation.animationMixer.clipAction(gltf.animations[i]);
+                action.clampWhenFinished = true;
+                action.setLoop(THREE.LoopOnce);
+                thisPowerstation.animations.set(gltf.animations[i].name, action);
+                console.log(gltf.animations[i].name);
+            }
+
             //PowerStationFromFile.add(gltf.scene);
             gltf.scene.position.set(0, 0, 0);
             thisPowerstation.add(gltf.scene);
