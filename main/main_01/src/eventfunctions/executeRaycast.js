@@ -46,7 +46,7 @@ export function executeRaycast(event) {
         firstHit.parentPowerstation.animations.get('ArmDown').play();
         armDownBlender = true;
       }
-    } else if (firstHit.name === 'BlatneuR' || 'BlatneuL' || 'Blatneu.003' || 'Blatneu'){
+    } else if (firstHit.name === 'BlatneuR' || firstHit.name === 'BlatneuL' || firstHit.name === 'Blatneu003' || firstHit.name === 'Blatneu'){
       if (armDownBlender) {
         firstHit.parentPowerstation.animations.get('RotationBlatR').stop();
         firstHit.parentPowerstation.animations.get('RottionBlatL').stop();
