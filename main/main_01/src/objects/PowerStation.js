@@ -13,8 +13,9 @@ const bladeMaterial = new THREE.MeshStandardMaterial({
     roughness: 0.0,
     metalness: 0.15,
     side: THREE.DoubleSide,
-    //map: new THREE.TextureLoader().load('src/images/BladeMaterial.jpg')
+    map: new THREE.TextureLoader().load('src/images/BladeMaterial.jpg')
 });
+
 /*
 const bladeGeometryOld = new THREE.CylinderGeometry(2, 2, 32, 32);
 const bladeOld = new THREE.Mesh(bladeGeometryOld, bladeMaterial);
@@ -556,8 +557,10 @@ export default class PowerStation extends THREE.Group {
     }
 
     addPhysics(){
-        window.physics.addCylinder(this,3,8, 8, 70, 32,0,35,-1,0,85,0,true);
-        window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
+        //window.physics.addBox(this,3,10, 3, 60, 0,24,-40,true);
+        console.log(this.children[1]);
+        window.physics.addCylinder(this,3,8, 8, 70, 32,0,35,-1,0,0,0,true);
+        // nur letzte hinzugefügte physics box ist mit dem Objekt verbunden?
     }
 
     addSound() {

@@ -56,6 +56,6 @@ export default class PowerStationFromFile extends THREE.Group {
 
     addPhysics(){
         window.physics.addCylinder(this,3,8, 8, 70, 32,0,35,-1,0,85,0,true);
-        window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
+        //window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
     }
 }
