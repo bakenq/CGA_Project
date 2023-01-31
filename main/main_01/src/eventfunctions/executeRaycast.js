@@ -4,7 +4,7 @@ window.raycaster = new THREE.Raycaster();
 
 let blades = false;
 let armDown = true;
-let ArmDown = false;
+let ArmDown = true;
 
 export function executeRaycast(event) {
 
@@ -43,11 +43,18 @@ export function executeRaycast(event) {
       } else {
         firstHit.parentPowerstation.animations.get('ArmUp').stop();
         firstHit.parentPowerstation.animations.get('ArmDown').play();
+        ArmDown = true;
       }
+    } else if (firstHit.name === 'BlatneuR' || 'BlatneuL' || 'Blatneu.003' || 'Blatneu'){
+      firstHit.parentPowerstation.state.BlatneuR = !firstHit.parentPowerstation.state.BlatneuR;
+      if (firstHit.parentPowerstation.state.BlatneuR){
+        firstHit.parentPowerstation.animations.get('RotationBlatR').play();
+        firstHit.parentPowerstation.animations.get('RottionBlatL').play();
+      }
+
     }
   }
 
 }
 export {blades};
 export {armDown};
-
