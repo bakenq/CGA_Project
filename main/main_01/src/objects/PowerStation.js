@@ -6,6 +6,7 @@ import {GridShader} from '../shaders/GridShader.js';
 
 import {Animation, AnimationType, AnimationAxis} from '../animation/Animation.js';
 
+
 // Export Variablen
 const bladeMaterial = new THREE.MeshStandardMaterial({
     color: 0xd3d3d3,
@@ -107,10 +108,12 @@ bladeGroupRD.rotation.y = -4 / Math.PI;
 const pivotpoint = new THREE.Group();
 pivotpoint.add(bladeGroupRD, bladeGroupRU);
 pivotpoint.position.set(53.75, 4.5, -5);
+pivotpoint.children[0].name = 'blade1';
 //pivotpoint.rotation.y = Math.PI;
 
 const pivotpoint2 = pivotpoint.clone();
 pivotpoint2.position.set(9.75, 4.5, -5);
+pivotpoint2.children[0].name = 'blade2';
 
 
 
@@ -556,9 +559,16 @@ export default class PowerStation extends THREE.Group {
 
     }
 
+    updateFunctionalState() {
+
+    }
+
     addPhysics(){
         //window.physics.addBox(this,3,10, 3, 60, 0,24,-40,true);
-        console.log(this.children[1]);
+        console.log(this.children[16]);
+        console.log(this.children[16].children[3].children[0]); // blade 1
+        console.log(this.children[16].children[4].children[0]); // blade 1
+
         window.physics.addCylinder(this,3,8, 8, 70, 32,0,35,-1,0,0,0,true);
         // nur letzte hinzugefügte physics box ist mit dem Objekt verbunden?
     }
