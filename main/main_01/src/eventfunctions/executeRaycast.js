@@ -45,13 +45,11 @@ export function executeRaycast(event) {
         firstHit.parentPowerstation.animations.get('ArmDown').play();
         ArmDown = true;
       }
-    } else if (firstHit.name === 'BlatneuR' || 'BlatneuL' || 'Blatneu.003' || 'Blatneu'){
-      firstHit.parentPowerstation.state.BlatneuR = !firstHit.parentPowerstation.state.BlatneuR;
-      if (firstHit.parentPowerstation.state.BlatneuR){
+    } else if (firstHit.name === 'BlatneuR' || 'BlatneuL' || 'Blatneu003' || 'Blatneu'){
+      if (firstHit.parentPowerstation.state.RotationBlatR) {
         firstHit.parentPowerstation.animations.get('RotationBlatR').play();
         firstHit.parentPowerstation.animations.get('RottionBlatL').play();
       }
-
     }
   }
 

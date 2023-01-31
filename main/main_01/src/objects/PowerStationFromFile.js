@@ -12,8 +12,8 @@ export default class PowerStationFromFile extends THREE.Group {
         this.state = {
             ArmUp: false,
             ArmDown: false,
-            RottionBlatL: false,
-            RotationBlatR: false
+            RottionBlatL: true,
+            RotationBlatR: true
         };
         this.load(this);
     }
@@ -27,6 +27,16 @@ export default class PowerStationFromFile extends THREE.Group {
                     child.parentPowerstation = thisPowerstation;
                     child.receiveShadow = true;
                     child.castShadow = true;
+
+                }
+                if (child.name === 'BlatneuR' || 'BlatneuL' || 'Blatneu003' || 'Blatneu') {
+                    child.parentPowerstation = thisPowerstation;
+                    child.receiveShadow = true;
+                    child.castShadow = true;
+                    document.powerstationFromFile_sound = document.createElement('video');
+                    document.powerstationFromFile_sound.src = 'src/sounds/turbine.mp3';
+                    document.powerstationFromFile_sound.loop = false;
+                    document.powerstationFromFile_sound.volume = 0.3;
                 }
             });
 
@@ -48,10 +58,11 @@ export default class PowerStationFromFile extends THREE.Group {
         });
     }
 
-
-
-
-
+    updateFunctionalState() {
+        if (!this.state.ArmUp) {
+            document.powerstationFromFile_sound.play();
+        }
+    }
 
 
 
