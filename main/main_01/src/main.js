@@ -100,6 +100,12 @@ function main() {
   floor.position.set(0, 0, 0);
   window.scene.add(floor);
 
+  //Background
+  const background = new Background();
+  background.position.set(200,100,0);
+  //background.rotation.x = Math.PI;
+  window.scene.add(background);
+
   // Lights
   const ambientLight = new THREE.AmbientLight(0xffffff);
   ambientLight.intensity = 0.5;

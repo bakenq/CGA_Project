@@ -29,16 +29,17 @@ const blade2Old = bladeOld.clone();
 
 
 //Blades mit BufferGeoemtry
+//Blades mit BufferGeoemtry
 const positions = [
     1, 1, 0, //0
     0, 0, 3, //1
     1, 20, 2, //2
-    0.75, 20, 3, //3
+    0.74, 20, 3, //3
 
     1, 1, 0, //4
     2, 0, 3, //5
     1, 20, 2, //6
-    1.25, 20, 3, //7
+    1.26, 20, 3, //7
 ];
 
 const indices = [
@@ -107,12 +108,12 @@ bladeGroupRD.rotation.y = -4 / Math.PI;
 //Set Pivot for Rotation
 const pivotpoint = new THREE.Group();
 pivotpoint.add(bladeGroupRD, bladeGroupRU);
-pivotpoint.position.set(53.75, 4.5, -5);
+pivotpoint.position.set(53.75, 6, -5.5);
 pivotpoint.children[0].name = 'blade1';
 //pivotpoint.rotation.y = Math.PI;
 
 const pivotpoint2 = pivotpoint.clone();
-pivotpoint2.position.set(9.75, 4.5, -5);
+pivotpoint2.position.set(9.75, 6, -5.5);
 pivotpoint2.children[0].name = 'blade2';
 
 
@@ -341,7 +342,7 @@ export default class PowerStation extends THREE.Group {
         //Turbine
         const turbineGeometry = new THREE.CapsuleGeometry(2,20);
         const turbine = new THREE.Mesh(turbineGeometry, towerBumpMaterial);
-        turbine.position.set(54,4.5,3);
+        turbine.position.set(54,6,3);
         turbine.castShadow = true;
         turbine.receiveShadow = true;
         turbine.rotation.z = Math.PI / 2;
@@ -349,7 +350,7 @@ export default class PowerStation extends THREE.Group {
 
 
         const turbine2 = turbine.clone();
-        turbine2.position.set(10,4.5,3);
+        turbine2.position.set(10,6,3);
 
 
         //this.add(turbine, turbine2);
