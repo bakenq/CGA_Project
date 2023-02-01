@@ -6,19 +6,14 @@ import Stats from 'stats';
 
 // Own modules
 import PowerStation from './objects/PowerStation.js';
-import Television from './objects/Television.js';
-import TelevisionFromFile from './objects/TelevisionFromFile.js';
-import TableFromFile from './objects/TableFromFile.js';
-import PlantFromFile from './objects/PlantFromFile.js';
 import Floor from './objects/Floor.js';
 import Background from "./objects/Background.js";
 import Physics from './physics/Physics.js';
 import PowerStationFromFile from './objects/PowerStationFromFile.js';
 
+// Variable Imports
 import {blades} from "./eventfunctions/executeRaycast.js";
 import {armDown} from "./eventfunctions/executeRaycast.js";
-//import {bladeOld} from "./objects/PowerStation.js";
-//import {blade2Old} from "./objects/PowerStation.js";
 import {pivotpoint} from "./objects/PowerStation.js";
 import {pivotpoint2} from "./objects/PowerStation.js";
 
@@ -31,7 +26,7 @@ import {keyDownAction, keyUpAction} from './eventfunctions/executeKeyAction.js';
 function main() {
 
   window.scene = new THREE.Scene();
-  window.scene.add(new THREE.AxesHelper(50));
+  //window.scene.add(new THREE.AxesHelper(50));
 
   window.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
   window.camera.position.set(-100, 300, 300);
@@ -42,7 +37,7 @@ function main() {
   window.renderer.shadowMap.enabled = true;
 
   window.physics = new Physics(false);
-  window.physics.setup(0, -200, 0, 1 / 240, true);
+  window.physics.setup(0, -300, 0, 1 / 240, true);
 
   window.audioListener = new THREE.AudioListener();
   window.camera.add(window.audioListener);
@@ -52,49 +47,17 @@ function main() {
 
   // Power Station
   const powerStation = new PowerStation();
-  powerStation.position.set(0, 0, -50);
+  powerStation.position.set(0, 0.5, -50);
   powerStation.addPhysics();
-  //powerStation.addSound();
   window.scene.add(powerStation);
 
   //Powerstationfromfile
   const powerStationFromFile = new PowerStationFromFile();
   powerStationFromFile.scale.set(7.5,7.5,7.5);
-  powerStationFromFile.position.set(0, 0, 50);
+  powerStationFromFile.position.set(0, 0.5, 50);
   powerStationFromFile.rotation.y = Math.PI;
   powerStationFromFile.addPhysics();
   window.scene.add(powerStationFromFile);
-
-  // Blades
-  // weil ich noch nicht weiß wie ich die Animation in der externen Datei mache
-  /*
-  const bladeMaterial = new THREE.MeshPhongMaterial({
-    color: 0xd3d3d3,
-    flatShading: true,
-    specular: 0x111111,
-    shininess: 100
-  });
-
-  const bladeGeometry = new THREE.CylinderGeometry(2, 2, 32, 32);
-  const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
-  blade.position.set(-8, 24, -22);
-  blade.castShadow = true;
-  blade.name = 'blades';
-  window.scene.add(blade);
-
-  const blade2 = blade.clone();
-  blade2.position.set(-8, 24, 22);
-  window.scene.add(blade2)
-
-   */
-
-  /*
-  const blade2 = new THREE.Mesh(bladeGeometry, bladeMaterial);
-  blade2.position.set(-8, 24, 22);
-  blade2.castShadow = true;
-  window.scene.add(blade2)
-   */
-
 
   // Floor
   const floor = new Floor();
@@ -103,7 +66,6 @@ function main() {
   window.scene.add(floor);
 
   //Background
-
   const background = new Background();
   background.position.set(200,100,0);
   //background.rotation.x = Math.PI;
@@ -159,8 +121,6 @@ function main() {
 
     // Update the blade's rotation
     if (blades) {
-      //bladeOld.rotation.z -= 1 * delta;
-      //blade2Old.rotation.z += 1 * delta;
       pivotpoint.rotation.z -= 1 * delta;
       pivotpoint2.rotation.z += 1 * delta;
     } else if (!armDown) {
@@ -168,10 +128,7 @@ function main() {
       pivotpoint2.rotation.z = 0;
     }
 
-
     window.physics.update(delta);
-
-
 
     window.renderer.render(window.scene, window.camera);
 

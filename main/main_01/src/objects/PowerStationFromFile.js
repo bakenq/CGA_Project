@@ -46,7 +46,6 @@ export default class PowerStationFromFile extends THREE.Group {
                 //console.log(gltf.animations[i].name);
             }
 
-            //PowerStationFromFile.add(gltf.scene);
             gltf.scene.position.set(0, 0, 0);
             thisPowerstation.add(gltf.scene);
             thisPowerstation.loadingDone = true;
@@ -63,8 +62,12 @@ export default class PowerStationFromFile extends THREE.Group {
     }
 
     addPhysics(){
-        // Auch hier: nur die letzte hinzugefügte Physics Box ist an das Modell gebunden
-        window.physics.addCylinder(this,3,8, 8, 85, 32,0,35,0,0,85,0,true);
-        //window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
+        if (this.loadingDone === false) {
+            window.setTimeout(this.addPhysics.bind(this), 100);
+        } else {
+            // Auch hier: nur die letzte hinzugefügte Physics Box ist an das Modell gebunden
+            window.physics.addCylinder(this,3,8, 8, 75, 32,0,37,0,0,0,0,true);
+            //window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
+        }
     }
 }
