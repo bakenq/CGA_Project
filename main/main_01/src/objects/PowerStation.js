@@ -166,6 +166,11 @@ export default class PowerStation extends THREE.Group {
             shininess: 100
         });
 
+        const towerDetailMaterial = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            flatshading: true,
+        })
+
 
         // Geometry
         //---------
@@ -220,6 +225,9 @@ export default class PowerStation extends THREE.Group {
         fence.castShadow = true;
         //this.add(fence, fence2);
 
+
+
+
         //Copys
         const fence2 = fence.clone();
         fence2.position.set(0,62.25, -13.5);
@@ -261,6 +269,15 @@ export default class PowerStation extends THREE.Group {
         const towerBalconyRailingBot = towerBalconyRailing.clone();
         towerBalconyRailingBot.position.set(0, 62,0);
         this.add(towerBalconyRailingBot);
+
+        // TowerTop Detail
+
+        // TowerTop Detail
+        const towerTopDetailGeometry = new THREE.CylinderGeometry(0.2,0.25,0.5,42,);
+        const topdetail = new THREE.Mesh(towerTopDetailGeometry, towerDetailMaterial);
+        topdetail.position.set(0,78,0.5);
+        topdetail.castShadow = true;
+        this.add(topdetail);
 
 
         //Tower Top Roof
