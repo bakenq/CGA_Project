@@ -31,9 +31,9 @@ export default class PowerStationFromFile extends THREE.Group {
                 }
                 if (child.name === 'BlatneuR' || child.name === 'BlatneuL' || child.name === 'Blatneu003' || child.name === 'Blatneu') {
                     document.powerstationFromFile_sound = document.createElement('video');
-                    document.powerstationFromFile_sound.src = 'src/sounds/turbine.mp3';
+                    document.powerstationFromFile_sound.src = 'src/sounds/TurbSound.mp3';
                     document.powerstationFromFile_sound.loop = false;
-                    document.powerstationFromFile_sound.volume = 0.3;
+                    document.powerstationFromFile_sound.volume = 1.0;
                 }
             });
 
