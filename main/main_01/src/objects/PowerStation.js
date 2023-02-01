@@ -193,11 +193,12 @@ export default class PowerStation extends THREE.Group {
          */
 
         const towerBumpMaterial = new THREE.MeshStandardMaterial({
-            color: 0xe5de00,
+            //color: 0xe5de00,
             flatShading: false,
             roughness: 0.0,
             metalness: 0.15,
-            bumpMap: new THREE.TextureLoader().load('src/images/newBump.jpeg'),
+            bumpMap: new THREE.TextureLoader().load('src/images/BigBump.jpeg'),
+            map: new THREE.TextureLoader().load('src/images/TurbMap.jpg'),
             bumpScale: 0.1
         })
 
