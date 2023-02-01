@@ -39,12 +39,12 @@ Das Zielen ist mit der Kamera möglich, da der Ball immer genau mittig vom Sicht
 Die genaue Steuerung der Kamera wird im folgenden Abschnitt zusammengefasst.
 
 ## Steuerung und andere Anpassungen
-Interaktion/Animation abspielen: Linksklick
+Interaktion/Animation abspielen: Linksklick  
 
-Kamera drehen: Linkslick halten
-Kamera bewegen: Rechtsklick halten
-Zoom: Mausrad
-Ball schießen: Leertaste
+Kamera drehen: Linkslick halten  
+Kamera bewegen: Rechtsklick halten  
+Zoom: Mausrad  
+Ball schießen: Leertaste  
 
-Steuerung der Beleuchtung: rechte obere Ecke
+Steuerung der Beleuchtung: rechte obere Ecke  
 Performance: linke obere Ecke
