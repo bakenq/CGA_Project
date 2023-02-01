@@ -48,3 +48,7 @@ Ball schießen: Leertaste
 
 Steuerung der Beleuchtung: rechte obere Ecke  
 Performance: linke obere Ecke
+
+### External Sources
+Water Floor texture: https://www.the3rdsequence.com/texturedb/texture/30/rough+sea/  
+Ocean Waves sound: https://freesound.org/people/Joozz/sounds/531950/  
