@@ -11,6 +11,7 @@ import TelevisionFromFile from './objects/TelevisionFromFile.js';
 import TableFromFile from './objects/TableFromFile.js';
 import PlantFromFile from './objects/PlantFromFile.js';
 import Floor from './objects/Floor.js';
+import Background from "./objects/Background.js";
 import Physics from './physics/Physics.js';
 import PowerStationFromFile from './objects/PowerStationFromFile.js';
 
@@ -40,7 +41,7 @@ function main() {
   window.renderer.setClearColor(0xffffff);
   window.renderer.shadowMap.enabled = true;
 
-  window.physics = new Physics(true);
+  window.physics = new Physics(false);
   window.physics.setup(0, -200, 0, 1 / 240, true);
 
   window.audioListener = new THREE.AudioListener();
@@ -51,7 +52,7 @@ function main() {
 
   // Power Station
   const powerStation = new PowerStation();
-  powerStation.position.set(0, 0, 0);
+  powerStation.position.set(0, 0, -50);
   powerStation.addPhysics();
   powerStation.addSound();
   window.scene.add(powerStation);
@@ -59,7 +60,7 @@ function main() {
   //Powerstationfromfile
   const powerStationFromFile = new PowerStationFromFile();
   powerStationFromFile.scale.set(7.5,7.5,7.5);
-  powerStationFromFile.position.set(0, 0, 70);
+  powerStationFromFile.position.set(0, 0, 50);
   powerStationFromFile.rotation.y = Math.PI;
   powerStationFromFile.addPhysics();
   window.scene.add(powerStationFromFile);
@@ -101,10 +102,12 @@ function main() {
   window.scene.add(floor);
 
   //Background
+
   const background = new Background();
   background.position.set(200,100,0);
   //background.rotation.x = Math.PI;
   window.scene.add(background);
+
 
   // Lights
   const ambientLight = new THREE.AmbientLight(0xffffff);

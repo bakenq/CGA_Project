@@ -565,12 +565,15 @@ export default class PowerStation extends THREE.Group {
     }
 
     addPhysics(){
-        //window.physics.addBox(this,3,10, 3, 60, 0,24,-40,true);
+        // Hier nut zum testen wie die children aufgebaut sind
+        /*
         console.log(this.children[16]);
         console.log(this.children[16].children[3].children[0]); // blade 1
         console.log(this.children[16].children[4].children[0]); // blade 1
+         */
 
-        window.physics.addCylinder(this,3,8, 8, 70, 32,0,35,0,0,0,0,true);
+        //window.physics.addBox(this,3,10, 3, 60, 0,24,-40,true);
+        window.physics.addCylinder(this,3,8, 8, 85, 32,0,35,0,0,0,0,true);
         // nur letzte hinzugefügte physics box ist mit dem Objekt verbunden?
     }
 

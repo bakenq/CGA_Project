@@ -17,7 +17,7 @@ export function executeRaycast(event) {
 
   if (intersects.length > 0) {
     let firstHit = intersects[0].object;
-    console.log(firstHit.name);
+    //console.log(firstHit.name);
 
     if (firstHit.name === 'bladeArm') {
       firstHit.up = !firstHit.up;

@@ -29,10 +29,7 @@ export default class PowerStationFromFile extends THREE.Group {
                     child.castShadow = true;
 
                 }
-                if (child.name === 'BlatneuR' || 'BlatneuL' || 'Blatneu003' || 'Blatneu') {
-                    child.parentPowerstation = thisPowerstation;
-                    child.receiveShadow = true;
-                    child.castShadow = true;
+                if (child.name === 'BlatneuR' || child.name === 'BlatneuL' || child.name === 'Blatneu003' || child.name === 'Blatneu') {
                     document.powerstationFromFile_sound = document.createElement('video');
                     document.powerstationFromFile_sound.src = 'src/sounds/turbine.mp3';
                     document.powerstationFromFile_sound.loop = false;
@@ -41,18 +38,19 @@ export default class PowerStationFromFile extends THREE.Group {
             });
 
             thisPowerstation.animationMixer = new THREE.AnimationMixer(gltf.scene);
-            for (let i = 0; i < gltf.animations.length; i++){
+            for (let i = 0; i < gltf.animations.length; i++) {
                 let action = thisPowerstation.animationMixer.clipAction(gltf.animations[i]);
                 action.clampWhenFinished = true;
                 action.setLoop(THREE.LoopOnce);
                 thisPowerstation.animations.set(gltf.animations[i].name, action);
-                console.log(gltf.animations[i].name);
+                //console.log(gltf.animations[i].name);
             }
 
             //PowerStationFromFile.add(gltf.scene);
             gltf.scene.position.set(0, 0, 0);
             thisPowerstation.add(gltf.scene);
             thisPowerstation.loadingDone = true;
+            // Hab leider keinen anderen listener type als "finished" gefunden
             thisPowerstation.animationMixer.addEventListener('finished', thisPowerstation.updateFunctionalState.bind(thisPowerstation));
 
         });
@@ -64,11 +62,9 @@ export default class PowerStationFromFile extends THREE.Group {
         }
     }
 
-
-
-
     addPhysics(){
-        window.physics.addCylinder(this,3,8, 8, 70, 32,0,35,0,0,85,0,true);
+        // Auch hier: nur die letzte hinzugefügte Physics Box ist an das Modell gebunden
+        window.physics.addCylinder(this,3,8, 8, 85, 32,0,35,0,0,85,0,true);
         //window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
     }
 }
