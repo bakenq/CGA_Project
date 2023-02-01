@@ -19,4 +19,17 @@ export default class Floor extends THREE.Group {
     floor.receiveShadow = true;
     this.add(floor);
   }
+
+  addSound() {
+    const sound = new THREE.PositionalAudio(window.audioListener);
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load('src/sounds/ocean.wav', function (buffer) {
+      sound.setBuffer(buffer);
+      sound.setRefDistance(30);
+      sound.setVolume(0.4);
+      sound.setLoop(true);
+      sound.play();
+    });
+    this.add(sound);
+  }
 }

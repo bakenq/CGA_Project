@@ -54,7 +54,7 @@ function main() {
   const powerStation = new PowerStation();
   powerStation.position.set(0, 0, -50);
   powerStation.addPhysics();
-  powerStation.addSound();
+  //powerStation.addSound();
   window.scene.add(powerStation);
 
   //Powerstationfromfile
@@ -99,6 +99,7 @@ function main() {
   // Floor
   const floor = new Floor();
   floor.position.set(0, 0, 0);
+  floor.addSound();
   window.scene.add(floor);
 
   //Background
