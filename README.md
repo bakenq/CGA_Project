@@ -27,9 +27,9 @@ befinden und sich erst wieder drehen sollen, sobald sie das Wasser erreichen.
 Die Rotoren des Three.js-Modells lassen sich an beliebigen Positionen stoppen, aber werden an ihre Ursprungsposition
 zurückgesetzt, sobald der Arm nach oben gefahren wird. Die geschieht um zu vermeiden, dass die Rotoren unschön durch 
 die Plattform des Gezeitenkraftwerks "clippen".
-Die Rotoren des GLTF-Modells machen bei Klick eine Umdrehung und nach Ende der Animation wird mithilfe von 
-Funktionslogik ein Sound abgespielt, welcher des Herunterfahren der Rotoren bzw. des Generators darstellen soll.
-Dieser Sound wird ebenfalls abgespielt, wenn der Arm des GLTF-Modells nach unten gefahren ist.
+Die Rotoren des GLTF-Modells drehen sich bei Klick ebenfalls und lassen sich mit erneutem Klicken auch wieder stoppen.
+Sie kehren dann an ihre Ursprungsposition zurück. Bei der Animation des Hoch- und Runterfahrens des Armes wird 
+mithilfe von Funktionslogik ein Sound abgespielt, welcher die Hydraulik der Armes darstellen soll.
 
 Im Hintergrund sind ebenfalls durchgehend Meeresgeräusche zu vernehmen.
 

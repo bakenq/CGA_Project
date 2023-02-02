@@ -12,8 +12,8 @@ export default class PowerStationFromFile extends THREE.Group {
         this.state = {
             ArmUp: false,
             ArmDown: false,
-            RottionBlatL: true,
-            RotationBlatR: true
+            RottionBlatL: false,
+            RotationBlatR: false
         };
         this.load(this);
     }
@@ -29,21 +29,32 @@ export default class PowerStationFromFile extends THREE.Group {
                     child.castShadow = true;
 
                 }
-                if (child.name === 'BlatneuR' || child.name === 'BlatneuL' || child.name === 'Blatneu003' || child.name === 'Blatneu') {
-                    document.powerstationFromFile_sound = document.createElement('video');
+                if (child.name === 'Arm') {
+                    document.powerstationFromFile_sound = document.createElement('audio');
                     document.powerstationFromFile_sound.src = 'src/sounds/TurbSound.mp3';
                     document.powerstationFromFile_sound.loop = false;
                     document.powerstationFromFile_sound.volume = 1.0;
+
+                    document.powerstationFromFile_soundReverse = document.createElement('audio');
+                    document.powerstationFromFile_soundReverse.src = 'src/sounds/TurbSoundReverse.mp3';
+                    document.powerstationFromFile_soundReverse.loop = false;
+                    document.powerstationFromFile_soundReverse.volume = 1.0;
                 }
             });
 
             thisPowerstation.animationMixer = new THREE.AnimationMixer(gltf.scene);
             for (let i = 0; i < gltf.animations.length; i++) {
                 let action = thisPowerstation.animationMixer.clipAction(gltf.animations[i]);
-                action.clampWhenFinished = true;
-                action.setLoop(THREE.LoopOnce);
-                thisPowerstation.animations.set(gltf.animations[i].name, action);
-                //console.log(gltf.animations[i].name);
+                if (gltf.animations[i].name === 'RottionBlatL' || gltf.animations[i].name === 'RotationBlatR') {
+                    //console.log(gltf.animations[i].name);
+                    action.clampWhenFinished = true;
+                    action.setLoop(THREE.Loop);
+                    thisPowerstation.animations.set(gltf.animations[i].name, action);
+                } else {
+                    action.clampWhenFinished = true;
+                    action.setLoop(THREE.LoopOnce);
+                    thisPowerstation.animations.set(gltf.animations[i].name, action);
+                }
             }
 
             gltf.scene.position.set(0, 0, 0);
@@ -58,6 +69,8 @@ export default class PowerStationFromFile extends THREE.Group {
     updateFunctionalState() {
         if (!this.state.ArmUp) {
             document.powerstationFromFile_sound.play();
+        } else if (this.state.ArmUp) {
+            document.powerstationFromFile_soundReverse.play();
         }
     }
 

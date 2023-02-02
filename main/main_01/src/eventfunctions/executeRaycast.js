@@ -40,6 +40,9 @@ export function executeRaycast(event) {
       if (firstHit.parentPowerstation.state.ArmUp) {
         firstHit.parentPowerstation.animations.get('ArmDown').stop();
         firstHit.parentPowerstation.animations.get('ArmUp').play();
+
+        firstHit.parentPowerstation.animations.get('RotationBlatR').stop();
+        firstHit.parentPowerstation.animations.get('RottionBlatL').stop();
         armDownBlender = false;
       } else {
         firstHit.parentPowerstation.animations.get('ArmUp').stop();
@@ -47,12 +50,16 @@ export function executeRaycast(event) {
         armDownBlender = true;
       }
     } else if (firstHit.name === 'BlatneuR' || firstHit.name === 'BlatneuL' || firstHit.name === 'Blatneu003' || firstHit.name === 'Blatneu'){
+      firstHit.parentPowerstation.state.RotationBlatR = !firstHit.parentPowerstation.state.RotationBlatR;
       if (armDownBlender) {
         firstHit.parentPowerstation.animations.get('RotationBlatR').stop();
         firstHit.parentPowerstation.animations.get('RottionBlatL').stop();
         if (firstHit.parentPowerstation.state.RotationBlatR) {
           firstHit.parentPowerstation.animations.get('RotationBlatR').play();
           firstHit.parentPowerstation.animations.get('RottionBlatL').play();
+        } else {
+          firstHit.parentPowerstation.animations.get('RotationBlatR').stop();
+          firstHit.parentPowerstation.animations.get('RottionBlatL').stop();
         }
       }
     }
