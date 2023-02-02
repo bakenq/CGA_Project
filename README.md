@@ -52,3 +52,4 @@ Performance: linke obere Ecke
 ### External Sources
 Water Floor texture: https://www.the3rdsequence.com/texturedb/texture/30/rough+sea/  
 Ocean Waves sound: https://freesound.org/people/Joozz/sounds/531950/  
+Background: https://pixabay.com/de/photos/kondensstreifen-himmel-wolken-blau-982978/

@@ -168,7 +168,7 @@ export default class PowerStation extends THREE.Group {
 
         const towerDetailMaterial = new THREE.MeshStandardMaterial({
             color: 0xffffff,
-            flatshading: true,
+            flatShading: true,
         })
 
 
@@ -296,6 +296,19 @@ export default class PowerStation extends THREE.Group {
         towerAntenna.castShadow = true;
         towerAntenna.receiveShadow = true;
         this.add(towerAntenna);
+
+        //Tower Antenna Detail
+        const towerAntennaDetailGeometry = new THREE.BoxGeometry(1.5,2,0.2);
+        const antennaDetail = new THREE.Mesh(towerAntennaDetailGeometry, towerMaterial);
+        antennaDetail.position.set(0,85,-0.5);
+        antennaDetail.castShadow = true;
+        antennaDetail.receiveShadow = true;
+
+        const antennaDetail2 = antennaDetail.clone();
+        antennaDetail.position.set(0,85,-0.5);
+        antennaDetail2.rotation.y = Math.PI / 2 ;
+
+        this.add(antennaDetail, antennaDetail2);
 
         //Turbine
         const turbineGeometry = new THREE.CapsuleGeometry(2,20);

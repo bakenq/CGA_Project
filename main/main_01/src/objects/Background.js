@@ -8,7 +8,7 @@ export default class Background extends THREE.Group {
         const backgroundGeometry = new THREE.PlaneGeometry(400, 200);
         const backgroundMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, roughness: 0.3});
 
-        const backgroundTexture = new THREE.TextureLoader().load('src/images/background2.jpg');
+        const backgroundTexture = new THREE.TextureLoader().load('src/images/background.jpg');
         //backgroundTexture.repeat.set(4, 4);
         backgroundTexture.wrapS = THREE.RepeatWrapping;
         backgroundTexture.wrapT = THREE.RepeatWrapping;
