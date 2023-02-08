@@ -181,7 +181,7 @@ export default class PowerStation extends THREE.Group {
 
         // Base
         const baseGeometry = new THREE.CylinderGeometry(8, 8, 16, 32);
-        const base = new THREE.Mesh(baseGeometry, baseMaterial);
+        const base = new THREE.Mesh(baseGeometry, [baseTextured, baseMaterial, baseMaterial]);
         base.position.set(0, 8, 0);
         base.castShadow = true;
         base.receiveShadow = true;
