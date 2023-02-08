@@ -47,14 +47,14 @@ function main() {
 
   // Power Station
   const powerStation = new PowerStation();
-  powerStation.position.set(0, 0.5, -50);
+  powerStation.position.set(0, 2.5, -50);
   powerStation.addPhysics();
   window.scene.add(powerStation);
 
   //Powerstationfromfile
   const powerStationFromFile = new PowerStationFromFile();
   powerStationFromFile.scale.set(7.5,7.5,7.5);
-  powerStationFromFile.position.set(0, 0.5, 50);
+  powerStationFromFile.position.set(0, 37.5, 50);
   powerStationFromFile.rotation.y = Math.PI;
   powerStationFromFile.addPhysics();
   window.scene.add(powerStationFromFile);

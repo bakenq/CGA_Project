@@ -76,6 +76,7 @@ bladeGroupRU.add(rundBlade,blade);
 bladeGroupRU.position.set(-2.5, 3, -1.75);
 bladeGroupRU.scale.set(0.85, 0.85, 0.85);
 bladeGroupRU.rotation.y = 4 / Math.PI;
+bladeGroupRU.name = 'bladeGroupRU';
 //bladeGroupRU.scale.set(0.6, 0.6, 0.6);
 //bladeGroupRU.name = 'blades';
 
@@ -85,18 +86,21 @@ const bladeGroupRD = bladeGroupRU.clone();
 bladeGroupRD.position.set(2.5, -3, 0);
 bladeGroupRD.rotation.x = Math.PI;
 bladeGroupRD.rotation.y = -4 / Math.PI;
+bladeGroupRD.name = 'bladeGroupRD';
 
 
 //Pivot Group for Rotation
 const pivotpoint = new THREE.Group();
 pivotpoint.add(bladeGroupRD, bladeGroupRU);
 pivotpoint.position.set(53.75, 6, -5.5);
-pivotpoint.children[0].name = 'blade1';
+pivotpoint.name = 'pivotpoint';
+//pivotpoint.children[0].name = 'blade1';
 //pivotpoint.rotation.y = Math.PI;
 
 const pivotpoint2 = pivotpoint.clone();
 pivotpoint2.position.set(9.75, 6, -5.5);
-pivotpoint2.children[0].name = 'blade2';
+pivotpoint2.name = 'pivotpoint2';
+//pivotpoint2.children[0].name = 'blade2';
 
 //--------------------------end------------------
 
@@ -113,23 +117,23 @@ export default class PowerStation extends THREE.Group {
     addParts() {
         // Materials
         //----------
-        const baseMaterial = new THREE.MeshPhongMaterial({
+        const baseMaterial = new THREE.MeshStandardMaterial({
             color: 0x808080,
             flatShading: false,
-            specular: 0x111111,
-            shininess: 100
+            roughness: 0.5,
+            metalness: 0.35
         });
 
         const baseTextured = new THREE.MeshPhongMaterial({
             color: 0x808080,
             flatShading: false,
-            map: new THREE.TextureLoader().load('src/images/Rust.png'),
+            map: new THREE.TextureLoader().load('src/images/Rust.png')
         });
 
         const towerMaterial = new THREE.MeshStandardMaterial({
             color: 0xe5de00,
             flatShading: false,
-            roughness: 0.0,
+            roughness: 0.2,
             metalness: 0.15
         });
 
@@ -147,7 +151,7 @@ export default class PowerStation extends THREE.Group {
             metalness: 0.15,
             bumpMap: new THREE.TextureLoader().load('src/images/BigBump.jpeg'),
             map: new THREE.TextureLoader().load('src/images/TurbMap.jpg'),
-            bumpScale: 0.1
+            bumpScale: 0.2
         })
 
         const roofTextured = new THREE.MeshStandardMaterial({
@@ -177,10 +181,11 @@ export default class PowerStation extends THREE.Group {
 
         // Base
         const baseGeometry = new THREE.CylinderGeometry(8, 8, 16, 32);
-        const base = new THREE.Mesh(baseGeometry, [baseTextured, baseMaterial, baseMaterial]);
+        const base = new THREE.Mesh(baseGeometry, baseMaterial);
         base.position.set(0, 8, 0);
         base.castShadow = true;
         base.receiveShadow = true;
+        base.name = 'base';
         this.add(base);
 
         // Tower
@@ -189,12 +194,14 @@ export default class PowerStation extends THREE.Group {
         tower.position.set(0, 40, 0);
         tower.castShadow = true;
         tower.receiveShadow = true;
+        tower.name = 'tower';
 
         const towerSidesGeometry = new THREE.BoxGeometry(1, 44, 13.85);
         const towerSides = new THREE.Mesh(towerSidesGeometry, towerMaterial);
         towerSides.position.set(0, -2, 0);
         towerSides.castShadow = true;
         towerSides.receiveShadow = true;
+        towerSides.name = 'towerSides';
 
         tower.add(towerSides);
         this.add(tower);
@@ -206,6 +213,7 @@ export default class PowerStation extends THREE.Group {
         towerTop.position.set(0,65,0);
         towerTop.castShadow = true;
         towerTop.receiveShadow = true;
+        towerTop.name = 'towerTop';
         this.add(towerTop);
 
         // Tower balcony
@@ -215,6 +223,7 @@ export default class PowerStation extends THREE.Group {
         towerBalcony.rotation.y = Math.PI / 2;
         towerBalcony.castShadow = true;
         towerBalcony.receiveShadow = true;
+        towerBalcony.name = 'towerBalcony';
         this.add(towerBalcony);
 
         // Tower balcony fence
@@ -223,6 +232,7 @@ export default class PowerStation extends THREE.Group {
         const fence = new THREE.Mesh(fenceGeometry, towerMaterial);
         fence.position.set(0,62.25,13.5);
         fence.castShadow = true;
+        fence.name = 'fence';
         //this.add(fence, fence2);
 
 
@@ -263,6 +273,7 @@ export default class PowerStation extends THREE.Group {
         towerBalconyRailing.rotation.x = Math.PI / 2;
         towerBalconyRailing.castShadow = true;
         towerBalconyRailing.receiveShadow = true;
+        towerBalconyRailing.name = 'towerBalconyRailing';
         this.add(towerBalconyRailing);
 
         //Railing 2 bot
@@ -277,6 +288,7 @@ export default class PowerStation extends THREE.Group {
         const topdetail = new THREE.Mesh(towerTopDetailGeometry, towerDetailMaterial);
         topdetail.position.set(0,78,0.5);
         topdetail.castShadow = true;
+        topdetail.name = 'topdetail';
         this.add(topdetail);
 
 
@@ -287,6 +299,7 @@ export default class PowerStation extends THREE.Group {
         towerTopRoof.position.set(0,74,0);
         towerTopRoof.castShadow = true;
         towerTopRoof.receiveShadow = true;
+        towerTopRoof.name = 'towerTopRoof';
         this.add(towerTopRoof);
 
         //Tower Antenna
@@ -295,6 +308,7 @@ export default class PowerStation extends THREE.Group {
         towerAntenna.position.set(0,80,-0.5);
         towerAntenna.castShadow = true;
         towerAntenna.receiveShadow = true;
+        towerAntenna.name = 'towerAntenna';
         this.add(towerAntenna);
 
         //Tower Antenna Detail
@@ -303,6 +317,7 @@ export default class PowerStation extends THREE.Group {
         antennaDetail.position.set(0,85,-0.5);
         antennaDetail.castShadow = true;
         antennaDetail.receiveShadow = true;
+        antennaDetail.name = 'antennaDetail';
 
         const antennaDetail2 = antennaDetail.clone();
         antennaDetail.position.set(0,85,-0.5);
@@ -318,6 +333,7 @@ export default class PowerStation extends THREE.Group {
         turbine.receiveShadow = true;
         turbine.rotation.z = Math.PI / 2;
         turbine.rotation.y = Math.PI / 2;
+        turbine.name = 'turbine';
 
 
         const turbine2 = turbine.clone();
@@ -331,6 +347,7 @@ export default class PowerStation extends THREE.Group {
         arm.position.set(0 , 24, 0);
         arm.castShadow = true;
         arm.receiveShadow = true;
+        arm.name = 'arm';
 
 
         const length = 64, width = 8;
@@ -380,6 +397,7 @@ export default class PowerStation extends THREE.Group {
         const rescueRing = new THREE.Mesh(rescueRingGeometry, rescueRingMaterial);
         rescueRing.position.set(-3, 63.5, -7.5);
         rescueRing.rotation.y = Math.PI / 6;
+        rescueRing.name = 'rescueRing';
         this.add(rescueRing);
 
 
@@ -398,23 +416,24 @@ export default class PowerStation extends THREE.Group {
             2000).easing(TWEEN.Easing.Quadratic.Out);
         bladeArm.up = false;
 
+
     }
 
 
     addPhysics(){
         // Hier nut zum testen wie die children aufgebaut sind
+
+        //console.log(this);
         /*
-        console.log(this.children[16]);
         console.log(this.children[16].children[3].children[0]); // blade 1
         console.log(this.children[16].children[4].children[0]); // blade 1
          */
 
         //window.physics.addBox(this,3,10, 3, 60, 0,24,-40,true);
-        window.physics.addCylinder(this,3,8, 8, 75, 32,0,37,0,0,0,0,true);
+        window.physics.addCylinder(this,10,8, 8, 70, 32, 0, 35, 0);
         // nur letzte hinzugefügte physics box ist mit dem Objekt verbunden?
     }
 }
-
 
 export {pivotpoint};
 export {pivotpoint2};

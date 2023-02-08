@@ -57,7 +57,7 @@ export default class PowerStationFromFile extends THREE.Group {
                 }
             }
 
-            gltf.scene.position.set(0, 0, 0);
+            gltf.scene.position.set(0, -5, 0);
             thisPowerstation.add(gltf.scene);
             thisPowerstation.loadingDone = true;
             // Hab leider keinen anderen listener type als "finished" gefunden
@@ -79,7 +79,7 @@ export default class PowerStationFromFile extends THREE.Group {
             window.setTimeout(this.addPhysics.bind(this), 100);
         } else {
             // Auch hier: nur die letzte hinzugefügte Physics Box ist an das Modell gebunden
-            window.physics.addCylinder(this,3,8, 8, 75, 32,0,37,0,0,0,0,true);
+            window.physics.addCylinder(this,10,8, 8, 75, 32,0,0,0,0,0,0,true);
             //window.physics.addBox(this,3,10, 3, 60, 0,24,0,true);
         }
     }
